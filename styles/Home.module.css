@@ -8,7 +8,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: url('../public/wave.gif'); */
 }
 .oceanbg{
   height: 100%;
@@ -18,6 +17,26 @@
   position: fixed;
   right: 0;
   bottom: 0;
+  z-index: -1;
   min-width: 100%;
   min-height: 100%;
+}
+.marqueeContainer{
+  margin: auto 0;
+  width: 600px;
+  overflow: hidden;
+  text-align: center;
+  color:white;
+}
+.marquee{
+  animation: run 7s infinite linear;
+}
+
+@keyframes run {
+    0% {
+      transform: translateX(400px)
+    }
+    100%{
+      transform: translateX(-400px)
+    }
 }
