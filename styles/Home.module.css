@@ -41,17 +41,20 @@
   border-radius:50%;
   color: white;
   width: 30px;
-  border: 2px solid;
+  border: 2px solid #0d81a1;
   background-image: linear-gradient(to right,#0d81a1, #073846, #041b22);
   animation: rotate 5s linear infinite;
+  box-shadow: 5px 0px 10px 1px #0d81a1;
 }
 .portal:last-child{
   z-index: 0;
   transform: rotate(180deg)
 }
-.portal::after{
-  position: absolute;
-  z-index: 10;
+.portal:hover{
+  cursor: url("../public/left-arrow.png"), auto;
+}
+.portal:last-child:hover{
+  cursor: url("../public/right-arrow.png"), auto;
 }
 @keyframes run {
     0% {
