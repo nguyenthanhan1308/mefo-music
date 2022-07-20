@@ -58,7 +58,7 @@
   box-shadow: 8px 0px 12px 1px #045970;
 }
 .portal:first-child{
-  z-index: 3;
+  z-index: 2;
 }
 .portal:last-child{
   z-index: 1;
