@@ -1,5 +1,11 @@
-
+@font-face {
+  font-family: 'Futura';
+  src: url('../public/fonts/SFUFuturaLight.TTF');
+  font-weight: 400;
+  font-style: normal;
+}
 .main {
+  font-family: Futura;
   color: white;
   background-color: black;
   min-height: 100vh;
@@ -9,10 +15,9 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
-  background: url(../public/fish-store.gif);
+  background: url(../public/images/fish-store.gif);
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-text-stroke: 0.3px black;
 }
 .wrapper{
   display: flex;
@@ -67,10 +72,10 @@
   transform: rotate(180deg)
 }
 .portal:hover{
-  cursor: url("../public/left-arrow.png"), auto;
+  cursor: url("../public/images/left-arrow.png"), auto;
 }
 .portal:last-child:hover{
-  cursor: url("../public/right-arrow.png"), auto;
+  cursor: url("../public/images/right-arrow.png"), auto;
 }
 /* playlist */
 .playlist{
