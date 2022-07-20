@@ -11,11 +11,13 @@ export default function Home() {
               <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className={styles.main}>
-                <h1 style={{color:"white"}}>Now Playing</h1>
+              <h1 style={{ color: "white" }}>Now Playing</h1>
               <div className={styles.marqueeContainer}>
-                <div className={styles.portal}></div>
-                <p className={styles.marquee}>{"Raining Sound"}</p>
-                <div className={styles.portal}></div>
+                  <div className={styles.portal} />
+                  <div className={styles.blur} />
+
+                  <p className={styles.marquee}>{"Raining Sound"}</p>
+                  <div className={styles.portal} />
               </div>
 
               {/* <video autoPlay loop className={styles.video}>

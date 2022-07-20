@@ -25,6 +25,7 @@
   min-height: 100%;
 }
 .marqueeContainer{
+  position: relative;
   justify-content: space-between;
   display: flex;
   width: 600px;
@@ -33,21 +34,34 @@
   color:white;
 }
 .marquee{
-  z-index: 1;
+  z-index: 2;
   animation: run 7s infinite linear;
   font-style: italic;
+  cursor:default;
+}
+.blur{
+  position: absolute;
+  z-index:0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-color: white;
+  opacity: 0.2;
 }
 .portal{
   border-radius:50%;
   color: white;
   width: 30px;
-  border: 2px solid #0d81a1;
+  border: 2px solid #00c6fd;
   background-image: linear-gradient(to right,#0d81a1, #073846, #041b22);
   animation: rotate 5s linear infinite;
-  box-shadow: 5px 0px 10px 1px #0d81a1;
+  box-shadow: 8px 0px 12px 1px #045970;
+}
+.portal:first-child{
+  z-index: 3;
 }
 .portal:last-child{
-  z-index: 0;
+  z-index: 1;
   transform: rotate(180deg)
 }
 .portal:hover{
