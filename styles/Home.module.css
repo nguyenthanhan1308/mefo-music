@@ -80,6 +80,8 @@
 /* audio player */
 .controllers{
   margin-bottom: 20px;
+  width: 100%;
+  aspect-ratio: 16/9;
 }
 /* playlist */
 .playlist{
@@ -87,7 +89,6 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  height: 700px;
   width: 100%;
 }
 .playlistitems{
