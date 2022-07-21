@@ -140,8 +140,8 @@ export default function Home() {
                     {/* playlist */}
                     <div className={styles.playlist}>
                         <h1>PLAYLIST</h1>
-                        <button className={styles.playlistBu}>Add new song</button>
                         <div className={styles.blur}></div>
+                        <button className={styles.playlistButton}>Add new song</button>
                         <div className={styles.playlistitems}>
                             <ol>
                                 {playlist.map(song => (
@@ -176,7 +176,7 @@ export default function Home() {
                     <div className={styles.background}>
                         {backgroundList.map(background => (
                             <img
-                                style={{ zIndex: background.id === currentBackground.id ? 10:background.id }}
+                                style={{ zIndex: background.id === currentBackground.id ? 10 : background.id }}
                                 className={styles.backgroundImg}
                                 key={background.title}
                                 src={background.src}

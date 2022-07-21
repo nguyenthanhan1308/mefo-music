@@ -141,11 +141,25 @@
 }
 .playlistitems{
   width: 80%;
-    max-height: 330px;
-      overflow-y: scroll;
+  max-height: 330px;
+  overflow-y: scroll;
 }
 .playlistitems>ol>li{
   font-size: 24px;
+}
+.playlistButton{
+  z-index:3;
+  border-radius:8px;
+  background: #f0f0f06b;
+  padding: 1rem;
+  color:white;
+  outline:none;
+  border:none;
+  cursor:pointer;
+}
+.playlistButton:hover{
+  background: #f0f0f0b9;
+  transition:3s;
 }
 .nowPlaying{
   font-style: italic;
@@ -173,13 +187,7 @@
   height:80px!important;
   width: 80px!important;
 }
-.playlistButton{
-  background: #f0f0f0b0;
-  padding: 1rem;
-  color:white;
-  outline:none;
-  border:none;
-}
+
 /* background */
 .background{
   height: 80px;
