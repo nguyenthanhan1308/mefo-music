@@ -74,7 +74,7 @@
 }
 .marquee{
   z-index: 2;
-  animation: run 7s infinite linear;
+  animation: run 9s infinite linear;
   font-style: italic;
   cursor:default;
 }
@@ -152,14 +152,14 @@
 }
 .songIcon{
   cursor:pointer;
-  
+
 }
 /* animation */
 @keyframes run {
     0% {
-      transform: translateX(400px)
+      transform: translateX(550px)
     }
     100%{
-      transform: translateX(-400px)
+      transform: translateX(-550px)
     }
 }
