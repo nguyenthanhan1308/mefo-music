@@ -11,7 +11,7 @@ export default function Home() {
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
     // youtube search
     const [ytSearchTerm, setYTSearchTerm] = useState("");
-    const [youtubeVideo, setYoutubeVideo] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
     // tab state
     const tabTitleList = ["youtube","soundcloud","mp3"];
     const [currentTab, setCurrentTab] = useState("youtube");
@@ -43,7 +43,7 @@ export default function Home() {
             src: "/images/yourname.gif",
         },
     ];
-    const [currentBackground, setCurrentBackground] = useState(backgroundList[1]);
+    const [currentBackground, setCurrentBackground] = useState(backgroundList[0]);
     // playlist state
     const [playlist, setPlaylist] = useState([
         {
@@ -66,7 +66,11 @@ export default function Home() {
     const [nowPlaying, setNowPlaying] = useState(playlist[0]);
     // functions
     const onNowPlayingEnded = () => {
-        const nowPlayingIndex = playlist.findIndex(p => p.name === nowPlaying.name)
+        const nowPlayingIndex = playlist.findIndex(p => p.title === nowPlaying.title)
+        if(nowPlayingIndex === (playlist.length-1)){
+            setNowPlaying(playlist[0])
+            return;
+        }
         setNowPlaying(playlist[nowPlayingIndex+1]);
     }
     const onPortalClick = (action) => {
@@ -115,8 +119,13 @@ export default function Home() {
                 title: resultTitle,
                 src: `youtube.com/watch?v=${resultId}`
             };
-            const oldPlaylist = playlist;
-            setPlaylist([...oldPlaylist,result])
+            if(playlist.find(p=>p.id === resultId)) return ;
+            else{
+                const oldPlaylist = playlist;
+                setPlaylist([...oldPlaylist,result]);
+                setIsSearching(false);
+                setYTSearchTerm("");
+            }
         })
     }
     return (
@@ -145,10 +154,11 @@ export default function Home() {
                         <button className={styles.portal} onClick={() => onPortalClick("back")} />
                         <div className={styles.blur} />
                         <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>
-                            {nowPlaying.name}
+                            {nowPlaying.title}
                         </span>
                         <button className={styles.portal} onClick={() => onPortalClick("next")} />
                     </div>
+
                     {/* player */}
                     <ReactPlayer
                         className={styles.controllers}
@@ -161,19 +171,27 @@ export default function Home() {
                         onStart={() => setIsPlaying(true)}
                         onPlay={() => setIsPlaying(true)}
                     />
+
                     {/* playlist */}
                     <div className={styles.playlist}>
                         <h1>PLAYLIST</h1>
                         <div className={styles.blur}></div>
-                        <button className={styles.playlistButton} onClick={() => videoSearch(ytSearchTerm)}>
+                        <button
+                            className={`${styles.playlistButton} ${isSearching && styles.hidden}`}
+                            onClick={() => setIsSearching(true)}
+                        >
                             Add new song
                         </button>
-                        <input
-                            type="text"
-                            placeholder="Type something..."
-                            className={styles.ytSearchInput}
-                            onChange={e => onYTSearchTermChange(e)}
-                        />
+                        <div className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}>
+                            <input
+                                type="text"
+                                placeholder="Type something..."
+                                className={styles.ytSearchInput}
+                                value={ytSearchTerm}
+                                onChange={e => onYTSearchTermChange(e)}
+                            />
+                            <button onClick={() => videoSearch(ytSearchTerm)}>Confirm</button>
+                        </div>
                         <div className={styles.playlistitems}>
                             <ol>
                                 {playlist.map(song => (
@@ -204,6 +222,7 @@ export default function Home() {
                             </ol>
                         </div>
                     </div>
+
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (

@@ -5,6 +5,9 @@
   font-weight: 400;
   font-style: normal;
 }
+.hidden {
+  display: none !important;
+}
 .main {
   position:relative;
   --componentSpacing: 20px;
@@ -150,14 +153,18 @@
 .playlistitems>ol>li{
   font-size: 24px;
 }
-.playlistButton{
-  border-radius:8px;
-  background: #f0f0f06b;
-  padding: 1rem;
-  color:white;
-  outline:none;
-  border:none;
-  cursor:pointer;
+.searchGroup{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  width:100%;
+}
+.ytSearchInput{
+  margin-right:10px;
+  width:55%;
+}
+.ytSearchInput::placeholder{
+  color:rgba(255, 255, 255, 0.822);
 }
 .playlistButton:hover{
   background: #f0f0f0b9;

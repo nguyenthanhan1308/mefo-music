@@ -13,3 +13,20 @@ a {
 * {
   box-sizing: border-box;
 }
+button{
+  border-radius: 8px;
+  background: #f0f0f06b;
+  padding: 1rem;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+input{
+  border-radius: 8px;
+  background: #f0f0f06b;
+  padding: 1rem;
+  color: white;
+  outline: none;
+  border: none;
+}
