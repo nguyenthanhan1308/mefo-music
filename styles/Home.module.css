@@ -138,6 +138,7 @@
 }
 .song{
   display:flex;
+  position:relative;
   justify-content: flex-start;
   align-items: center;
 }
@@ -151,8 +152,12 @@
   white-space: nowrap;
 }
 .songIcon{
+  position:absolute;
   cursor:pointer;
-
+}
+.songGif{
+  height:80px!important;
+  width: 80px!important;
 }
 /* animation */
 @keyframes run {

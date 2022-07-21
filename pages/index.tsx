@@ -98,7 +98,7 @@ export default function Home() {
                             <ol>
                                 {playlist.map(song => (
                                     <div className={styles.song} key={`container ${song.name}`}>
-                                        <Image alt =" "key={song.name} onClick={() => playSelectedSong(song.id)} className={styles.songIcon} src={`${(song.id === nowPlaying.id && isPlaying)? "/playingsound.gif":"/sound.png"}`} height={40} width={40}/>
+                                        <Image alt ="" key={song.name} onClick={() => playSelectedSong(song.id)} className={`${styles.songIcon}`} src={`${(song.id === nowPlaying.id && isPlaying)? "/playingsound.gif":"/sound.png"}`} height={nowPlaying.id === song.id ? 80 : 40} width={nowPlaying.id === song.id ? 80 : 40}/>
                                         <li
                                             className={`${song.id === nowPlaying.id ? styles.nowPlaying : ""} ${styles.songListItem}`}
                                             key={song.id}
