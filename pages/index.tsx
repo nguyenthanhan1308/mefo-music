@@ -100,12 +100,6 @@ export default function Home() {
     };
 
     const videoSearch = (term) => {
-        // console.log("e", term);
-        // if (!term ) {
-        //     setPopup({ title: "Added !", message: "Already add your song to playlist", type: "YES_NO" });
-        //     setIsShowPopup(true);
-        //     return;
-        // }
         YTSearch({key:YOUTUBE_API_KEY, term:term}, (videos) => {
             const resultId = videos[0]?.id?.videoId;
             const resultTitle = videos[0]?.snippet?.title;

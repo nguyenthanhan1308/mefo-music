@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'Futura';
   src: url('../public/fonts/SFUFuturaLight.TTF');
@@ -22,9 +21,8 @@
   letter-spacing: 1px;
   font-family: Futura;
   color: white;
-  background-color: black;
-  min-height: 100vh;
-  min-width: 100vw;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -37,7 +35,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
+  width: 37.5em;
 }
 
 /* audio player */
@@ -57,7 +55,7 @@
   position: relative;
   width: 100%;
   padding-bottom: 20px;
-  max-height: 330px;
+  max-height: 20em;
 }
 .playlist > *{
   z-index:3;
@@ -75,7 +73,7 @@
 }
 .playlistitems{
   width: 90%;
-  max-height: 330px;
+  max-height: 20em;
   overflow-y: scroll;
 }
 .playlistitems>ol>li{
@@ -104,8 +102,8 @@
   align-items: center;
 }
 .songListItem{
-  width: 300px;
-  margin-left:40px;
+  width: 18.75em;
+  margin-left:2.5em;
 }
 .songName{
   text-overflow: ellipsis;
@@ -146,4 +144,21 @@
   width: 50px;
 }
 
-
+@media only screen and (max-width: 1920px) {
+  .wrapper {
+    font-size: 12px;
+  }
+  .playlist{
+    --playlistHeight: 35.2em;
+    position: absolute;
+    width: 37.5em;
+    right: 5em;
+    top: 11.3em;
+    max-height: 60em;
+    height:  var(--playlistHeight);
+  }
+  .playlistitems{
+    max-height: 60em;
+    height: var(--playlistHeight);
+  }
+}

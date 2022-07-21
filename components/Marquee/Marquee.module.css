@@ -1,6 +1,6 @@
 /* marquee */
 .marqueeContainer {
-    --marqueeHeight: 60px;
+    --marqueeHeight: 3.5em;
     position: relative;
     justify-content: space-between;
     margin-bottom: var(--componentSpacing);
@@ -25,12 +25,12 @@
 
 .portal {
     border-radius: 50%;
-    width: 35px;
     height: 100%;
+    width: 1em;
     border: 2px solid #00c6fd;
     background-image: linear-gradient(to right, #0d81a1, #073846, #041b22);
     animation: rotate 5s linear infinite;
-    box-shadow: 8px 0px 12px 1px #045970;
+    box-shadow: 0.5em 0px 0.75em 1px #045970;
 }
 
 .portal:first-child {
@@ -61,10 +61,15 @@
 
 @keyframes run {
     0% {
-        transform: translateX(550px)
+        transform: translateX(35em)
     }
 
     100% {
-        transform: translateX(-550px)
+        transform: translateX(-35em)
+    }
+}
+@media only screen and (max-width: 1920px) {
+    .marqueeContainer {
+        font-size: 12px;
     }
 }
