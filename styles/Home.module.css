@@ -72,7 +72,7 @@
   background-color: darkgrey;
 }
 .playlistitems{
-  width: 80%;
+  width: 90%;
   max-height: 330px;
   overflow-y: scroll;
 }
