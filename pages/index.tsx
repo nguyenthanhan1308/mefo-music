@@ -13,7 +13,8 @@ export default function Home() {
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
     // modal state
-
+    const [popup, setPopup] = useState({});
+    const [isShowPopup, setIsShowPopup] = useState(false);
     // youtube search
     const [ytSearchTerm, setYTSearchTerm] = useState("");
     const [isSearching, setIsSearching] = useState(false);
@@ -66,6 +67,7 @@ export default function Home() {
     ]);
     const [isPlaying, setIsPlaying] = useState(false);
     const [nowPlaying, setNowPlaying] = useState(playlist[0]);
+
     // functions
     const onNowPlayingEnded = () => {
         const nowPlayingIndex = playlist.findIndex(p => p.title === nowPlaying.title)
@@ -74,13 +76,15 @@ export default function Home() {
             return;
         }
         setNowPlaying(playlist[nowPlayingIndex+1]);
-    }
+    };
+
     const playSelectedSong = (id) => {
         if(isPlaying && id === nowPlaying.id) return;
         const selectedSong = playlist.find(p=>p.id === id)
         setIsPlaying(true);
         setNowPlaying(selectedSong)
-    }
+    };
+
     const setSelectedBackground = (id) => {
         if(id !== currentBackground.id) {
             const selectedBackground = backgroundList.find(p=>p.id === id);
@@ -88,13 +92,20 @@ export default function Home() {
             return;
         }
         return;
-    }
+    };
+
     const onYTSearchTermChange = (e) => {
-        if (!e) return;
+        
         setYTSearchTerm(e.target.value)
-    }
-    const videoSearch = (term) =>{
-        if(!term) return;
+    };
+
+    const videoSearch = (term) => {
+        // console.log("e", term);
+        // if (!term ) {
+        //     setPopup({ title: "Added !", message: "Already add your song to playlist", type: "YES_NO" });
+        //     setIsShowPopup(true);
+        //     return;
+        // }
         YTSearch({key:YOUTUBE_API_KEY, term:term}, (videos) => {
             const resultId = videos[0]?.id?.videoId;
             const resultTitle = videos[0]?.snippet?.title;
@@ -102,8 +113,12 @@ export default function Home() {
                 id: resultId,
                 title: resultTitle,
                 src: `youtube.com/watch?v=${resultId}`
-            };
-            if(playlist.find(p=>p.id === resultId)) return ;
+            }
+            if(playlist.find(p=>p.id === resultId)) {
+                setPopup({title:"Added !", message: "Already add your song to playlist", type:"YES_NO", time:3000})
+                setIsShowPopup(true);
+                return;
+            }
             else{
                 const oldPlaylist = playlist;
                 setPlaylist([...oldPlaylist,result]);
@@ -111,7 +126,7 @@ export default function Home() {
                 setYTSearchTerm("");
             }
         })
-    }
+    };
     return (
         <div className={styles.container}>
             <Head>
@@ -120,6 +135,7 @@ export default function Home() {
                 <link rel="icon" href="/song.ico" />
             </Head>
             <main className={styles.main} style={{ background: `url(${currentBackground.src})` }}>
+                {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup}/>}
                 <div className={styles.wrapper}>
                     {/* tab */}
                     <Tabs />

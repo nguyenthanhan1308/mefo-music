@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Popup.module.css";
 export default function Popup(props) {
-    const {type, message, title,time } = props;
-    const [isShowPopup,setIsShowPopup] = useState(false)
-    const renderPopup = (type, message, title, time = 0) => {
-        setIsShowPopup(true);
+    const {setIsShowPopup, isShowPopup} = props;
+    const {type, message, title, time } = props.popup;
+    const renderPopup = (type, time = 0) => {
         if(type !== "YES_NO") {
             setTimeout(() => {
                 setIsShowPopup(false);
@@ -12,9 +11,9 @@ export default function Popup(props) {
         }
     };
     useEffect(()=>{
-        renderPopup(type, message, title, time);
+        renderPopup(type, message);
     },[])
-    return isShowPopup ? (
+    return (
         <div className={styles.modal}>
             <div className={styles.popup} style={{ justifyContent: type === "YES_NO" ? "space-between" : "" }}>
                 <div
@@ -32,7 +31,7 @@ export default function Popup(props) {
                     {type === "YES_NO" ? (
                         <button className={styles.popupButton} onClick={() => setIsShowPopup(false)}>
                             {" "}
-                            Biết òi
+                            Got it!
                         </button>
                     ) : (
                         ""
@@ -40,7 +39,5 @@ export default function Popup(props) {
                 </div>
             </div>
         </div>
-    ) : (
-        <div></div>
-    );
+    ) 
 }
