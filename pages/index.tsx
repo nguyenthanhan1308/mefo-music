@@ -5,15 +5,15 @@ import { useState } from 'react';
 import React from 'react';
 import ReactPlayer from "react-player";
 import YTSearch from "youtube-api-search";
+// components
+import Tabs from "../components/Tabs/Tabs";
+import Marquee from "../components/Marquee/Marquee";
 export default function Home() {
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
     // youtube search
     const [ytSearchTerm, setYTSearchTerm] = useState("");
     const [isSearching, setIsSearching] = useState(false);
-    // tab state
-    const tabTitleList = ["youtube","soundcloud","mp3"];
-    const [currentTab, setCurrentTab] = useState("youtube");
     // background state
     const backgroundList = [
         {
@@ -72,25 +72,6 @@ export default function Home() {
         }
         setNowPlaying(playlist[nowPlayingIndex+1]);
     }
-    const onPortalClick = (action) => {
-        const nowPlayingIndex = playlist.findIndex(p => p.id === nowPlaying.id);
-        if(action === "next") {
-            nowPlayingIndex === playlist.length - 1 ? 
-            setNowPlaying(playlist[0]) : 
-            setNowPlaying(playlist[nowPlayingIndex + 1]);
-        }
-        else{
-            nowPlayingIndex === 0 ?
-            setNowPlaying(playlist[playlist.length - 1]) : 
-            setNowPlaying(playlist[nowPlayingIndex - 1]);
-        }
-    }
-    const onTabClick = (tab) => {
-        if(tab !== currentTab){
-            setCurrentTab(tab);
-        }
-        return;
-    }
     const playSelectedSong = (id) => {
         if(isPlaying && id === nowPlaying.id) return;
         const selectedSong = playlist.find(p=>p.id === id)
@@ -138,27 +119,9 @@ export default function Home() {
             <main className={styles.main} style={{ background: `url(${currentBackground.src})` }}>
                 <div className={styles.wrapper}>
                     {/* tab */}
-                    <div className={styles.tabs}>
-                        {tabTitleList.map(tab => (
-                            <div
-                                key={tab}
-                                className={`${styles.tab} ${tab === currentTab && styles.currentTab}`}
-                                onClick={() => onTabClick(tab)}
-                            >
-                                <span>{tab}</span>
-                            </div>
-                        ))}
-                    </div>
+                    <Tabs/>
                     {/* marquee */}
-                    <div className={styles.marqueeContainer}>
-                        <button className={styles.portal} onClick={() => onPortalClick("back")} />
-                        <div className={styles.blur} />
-                        <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>
-                            {nowPlaying.title}
-                        </span>
-                        <button className={styles.portal} onClick={() => onPortalClick("next")} />
-                    </div>
-
+                    <Marquee isPlaying={isPlaying} nowPlaying={nowPlaying} setNowPlaying={setNowPlaying} playlist={playlist}/>
                     {/* player */}
                     <ReactPlayer
                         className={styles.controllers}

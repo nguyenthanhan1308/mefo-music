@@ -5,6 +5,14 @@
   font-weight: 400;
   font-style: normal;
 }
+.blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-color: white;
+  opacity: 0.25;
+}
 .hidden {
   display: none !important;
 }
@@ -31,89 +39,7 @@
   align-items: center;
   width: 600px;
 }
-/* tab */
-.tabs {
-  margin: var(--componentSpacing) 0;
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.tab {
-  margin: 2.5rem 1rem 1rem 1rem;
-  padding: var(--componentSpacing);
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-bottom: 1px solid;
-  text-transform: capitalize;
-}
-
-.tab:hover {
-  border: 1px solid;
-  background-color: #f0f0f04d;
-  transition: 3s;
-}
-
-.currentTab {
-  font-weight: bold;
-  border: 1px solid;
-  background-color: #f0f0f077;
-}
-
-/* marquee */
-.marqueeContainer{
-  --marqueeHeight: 60px;
-  position: relative;
-  justify-content: space-between;
-  margin-bottom: var(--componentSpacing);
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  text-align: center;
-  height: var(--marqueeHeight) ;
-  align-items: center;
-}
-.marquee{
-  z-index: 2;
-  animation: run 9s infinite linear;
-  font-style: italic;
-  cursor:default;
-}
-.marqueeText{
-  font-size: calc(var(--marqueeHeight)/3);
-}
-.blur{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  background-color: white;
-  opacity: 0.25;
-}
-.portal{
-  border-radius:50%;
-  width: 35px;
-  height: 100%;
-  border: 2px solid #00c6fd;
-  background-image: linear-gradient(to right,#0d81a1, #073846, #041b22);
-  animation: rotate 5s linear infinite;
-  box-shadow: 8px 0px 12px 1px #045970;
-}
-.portal:first-child{
-  z-index: 2;
-}
-.portal:last-child{
-  z-index: 1;
-  transform: rotate(180deg)
-}
-.portal:hover{
-  cursor: url("../public/images/left-arrow.png"), auto;
-}
-.portal:last-child:hover{
-  cursor: url("../public/images/right-arrow.png"), auto;
-}
 /* audio player */
 .controllers{
   aspect-ratio: 16/9;
@@ -165,10 +91,6 @@
 }
 .ytSearchInput::placeholder{
   color:rgba(255, 255, 255, 0.822);
-}
-.playlistButton:hover{
-  background: #f0f0f0b9;
-  transition:3s;
 }
 .nowPlaying{
   font-style: italic;
@@ -222,12 +144,4 @@
   width: 50px;
 }
 
-/* animation */
-@keyframes run {
-    0% {
-      transform: translateX(550px)
-    }
-    100%{
-      transform: translateX(-550px)
-    }
-}
+
