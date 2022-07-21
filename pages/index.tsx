@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
@@ -9,21 +10,21 @@ export default function Home() {
     const [currentTab, setCurrentTab] = useState("youtube");
     const [playlist, setPlaylist] = useState([
         {
-            name: "My, nah, your playlist",
+            id:1,name: "My, nah, your playlist",
             src: "https://www.youtube.com/playlist?list=PLktFEPieLGU-UKQYl2huD770l-yzftC0n",
         },
-        { name: "7UPPERCUTS x Đá Số Tới / Tuyển tập Pop Punks", src: "https://youtu.be/22nk6yEPlfA" },
-        { name: "Lukas Graham - Happy Home", src: "https://youtu.be/QX6UhufF0cs" },
+        { id:2,name: "7UPPERCUTS x Đá Số Tới / Tuyển tập Pop Punks", src: "https://youtu.be/22nk6yEPlfA" },
+        { id:3,name: "Lukas Graham - Happy Home", src: "https://youtu.be/QX6UhufF0cs" },
     ]);
     const [nowPlaying, setNowPlaying] = useState(playlist[0]);
 
     // functions
-    const onNowPlayingEnded = () =>{
+    const onNowPlayingEnded = () => {
         const nowPlayingIndex = playlist.findIndex(p => p.name === nowPlaying.name)
         setNowPlaying(playlist[nowPlayingIndex+1]);
     }
     const onPortalClick = (action) => {
-        const nowPlayingIndex = playlist.findIndex(p => p.name === nowPlaying.name);
+        const nowPlayingIndex = playlist.findIndex(p => p.id === nowPlaying.id);
         if(action === "next") {
             nowPlayingIndex === playlist.length - 1 ? 
             setNowPlaying(playlist[0]) : 
@@ -35,12 +36,22 @@ export default function Home() {
             setNowPlaying(playlist[nowPlayingIndex - 1]);
         }
     }
-    const onTabClick = (tab) =>{
+    const onTabClick = (tab) => {
         if(tab !== currentTab){
             setCurrentTab(tab);
         }
         return;
     }
+    const playSelectedSong = (id) => { 
+        if(id !== nowPlaying.id)
+        {
+            const selectedSong = playlist.find(p=>p.id === id)
+            setIsPlaying(true);
+            setNowPlaying(selectedSong)
+        }
+        return;
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -85,12 +96,15 @@ export default function Home() {
                         <div className={styles.playlistitems}>
                             <ol>
                                 {playlist.map(song => (
-                                    <li
-                                        className={song.name === nowPlaying.name ? styles.nowPlaying : ""}
-                                        key={song.name}
-                                    >
-                                        {song.name}
-                                    </li>
+                                    <div className={styles.song}>
+                                        <Image onClick={() => playSelectedSong(song.id)} className={styles.songIcon} src={`${(song.id === nowPlaying.id && isPlaying)? "/playingsound.gif":"/sound.png"}`} height={40} width={40}/>
+                                        <li
+                                            className={`${song.id === nowPlaying.id ? styles.nowPlaying : ""} ${styles.songListItem}`}
+                                            key={song.id}
+                                        >
+                                            <p className={`${styles.songName}`}>{song.name}</p>
+                                        </li>
+                                    </div>
                                 ))}
                             </ol>
                         </div>

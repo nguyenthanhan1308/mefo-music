@@ -28,6 +28,36 @@
   align-items: center;
   width: 600px;
 }
+/* tab */
+.tabs {
+  margin: var(--componentSpacing) 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab {
+  margin: 2.5rem 1rem 1rem 1rem;
+  padding: var(--componentSpacing);
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid;
+  text-transform: capitalize;
+}
+
+.tab:hover {
+  border: 1px solid;
+  background-color: #f0f0f04d;
+  transition: 3s;
+}
+
+.currentTab {
+  font-weight: bold;
+  border: 1px solid;
+  background-color: #f0f0f077;
+}
 
 /* marquee */
 .marqueeContainer{
@@ -86,33 +116,7 @@
   aspect-ratio: 16/9;
   border: 1px solid #f0f0f0a4;
 }
-/* tab */
-.tabs{
-  margin: var(--componentSpacing) 0;
-  width: 100%;
-  position:relative;
-  display:flex;
-  align-items: center;
-  justify-content:center;
-}
-.tab{
-  margin: 2.5rem 1rem 1rem 1rem;  
-  padding: var(--componentSpacing);
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-bottom: 1px solid;
-  text-transform:capitalize;
-}
-.tab:hover{
-  border: 1px solid;
-  background-color: #f0f0f04d;
-  transition: 3s;
-}
-.currentTab{
-    font-weight: bold;
-    border: 1px solid ;
-    background-color: #f0f0f077;
-}
+
 /* playlist */
 .playlist{
   margin-top:var(--componentSpacing);
@@ -131,6 +135,24 @@
 }
 .nowPlaying{
   font-style: italic;
+}
+.song{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.songListItem{
+  width: 300px;
+  margin-left:40px;
+}
+.songName{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.songIcon{
+  cursor:pointer;
+  
 }
 /* animation */
 @keyframes run {
