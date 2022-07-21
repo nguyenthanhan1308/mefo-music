@@ -50,19 +50,39 @@ export default function Home() {
     // playlist state
     const [playlist, setPlaylist] = useState([
         {
-            id:1,
-            title: "My, nah, your playlist",
-            src: "https://www.youtube.com/playlist?list=PLktFEPieLGU-UKQYl2huD770l-yzftC0n",
-        },
-        { 
-            id:2,
-            title: "7UPPERCUTS x Đá Số Tới / Tuyển tập Pop Punks",
-            src: "https://youtu.be/22nk6yEPlfA"
+            id: 1,
+            title: "Post Malone - Wrapped Around Your Finger",
+            src: "https://www.youtube.com/watch?v=JXxAnZaZrG0",
         },
         {
-            id:3,
-            title: "Lukas Graham - Happy Home", 
-            src: "https://youtu.be/QX6UhufF0cs" 
+            id: 2,
+            title: "Lauv - Modern Loneliness",
+            src: "https://www.youtube.com/watch?v=bDidwMxir4o",
+        },
+        {
+            id: 3,
+            title: "AKMU - '어떻게 이별까지 사랑하겠어, 널 사랑하는 거지(How can I love the heartbreak, you`re the one I love)' M/V",
+            src: "https://www.youtube.com/watch?v=m3DZsBw5bnE",
+        },
+        {
+            id: 31,
+            title: "이하이 (LeeHi) - 'ONLY' Official MV",
+            src: "https://www.youtube.com/watch?v=KmOVNVZEP9o",
+        },
+        {
+            id: 4,
+            title: "Lukas Graham - Happy Home",
+            src: "https://youtu.be/QX6UhufF0cs",
+        },
+        {
+            id: 5,
+            title: "7UPPERCUTS - YÊU (OFFICIAL MUSIC VIDEO)",
+            src: "https://www.youtube.com/watch?v=XHZ3kKlpCWw&t=10s",
+        },
+        {
+            id: 6,
+            title: "ĐÁ SỐ TỚI「 LÀ TẤT CẢ 」OFFICIAL MUSIC VIDEO",
+            src: "https://www.youtube.com/watch?v=I8kMOJ1eYyM",
         },
     ]);
     const [isPlaying, setIsPlaying] = useState(false);
