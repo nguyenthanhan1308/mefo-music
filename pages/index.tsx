@@ -17,13 +17,23 @@ export default function Home() {
         },
         {
             id: 2,
-            title: "raining",
+            title: "night time",
             src: "/images/nighttime.gif",
         },
         {
             id: 3,
-            title: "fish store",
+            title: "convenience store",
             src: "/images/conveniencetstore.gif",
+        },
+        {
+            id: 4,
+            title: "peace",
+            src: "/images/peace.gif",
+        },
+        {
+            id: 5,
+            title: "your name",
+            src: "/images/yourname.gif",
         },
     ];
     const [currentBackground, setCurrentBackground] = useState(backgroundList[1]);
@@ -71,15 +81,11 @@ export default function Home() {
         }
         return;
     }
-    const playSelectedSong = (id) => { 
-        if(id !== nowPlaying.id)
-        {
-            const selectedSong = playlist.find(p=>p.id === id)
-            setIsPlaying(true);
-            setNowPlaying(selectedSong)
-            return;
-        }
-        return;
+    const playSelectedSong = (id) => {
+        if(isPlaying && id === nowPlaying.id) return;
+        const selectedSong = playlist.find(p=>p.id === id)
+        setIsPlaying(true);
+        setNowPlaying(selectedSong)
     }
     const setSelectedBackground = (id) => {
         if(id !== currentBackground.id) {
@@ -134,6 +140,7 @@ export default function Home() {
                     {/* playlist */}
                     <div className={styles.playlist}>
                         <h1>PLAYLIST</h1>
+                        <button className={styles.playlistBu}>Add new song</button>
                         <div className={styles.blur}></div>
                         <div className={styles.playlistitems}>
                             <ol>
