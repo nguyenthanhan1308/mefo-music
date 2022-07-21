@@ -5,6 +5,9 @@ const nextConfig = {
     images: {
         domains: ["https://dribbble.com"],
     },
+    compiler: {
+        styledComponents: true,
+    },
 };
 
 module.exports = nextConfig

@@ -15,7 +15,10 @@
     "react-player": "^2.10.1"
   },
   "devDependencies": {
+    "@types/node": "^18.0.6",
+    "@types/react": "^18.0.15",
     "eslint": "8.20.0",
-    "eslint-config-next": "12.2.2"
+    "eslint-config-next": "12.2.2",
+    "typescript": "^4.7.4"
   }
 }
