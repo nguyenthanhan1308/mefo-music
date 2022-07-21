@@ -1,0 +1,50 @@
+.modal{
+    height:100vh;
+    width: 100vw;
+    position:absolute;
+    z-index:100;
+    background: rgba(0, 0, 0, 0.582);
+}
+/* popup */
+.popup{
+    position: absolute;
+    width: 500px;
+    height: 180px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.452);
+    color: white;
+    outline: none;
+    border: none;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -200%);
+    display:flex;
+    flex-direction:column;
+}
+.popup > *{
+    padding: 0 12px;
+    display: flex;
+    width: 100%;
+}
+.popupHeader{
+    border-radius: 4px 4px 0 0;
+    font-size: 18px;
+    height: 25%;
+    font-weight: bold;
+    align-items: center;
+}
+.popupBody{
+    padding-top:8px;
+    font-size:20px;
+    height:50%;
+}
+.popupFooter{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 12px;
+}
+.popupButton{
+    border-radius: 4px;
+    text-transform: uppercase;
+    align-self: flex-end;
+}

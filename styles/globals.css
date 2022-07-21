@@ -14,7 +14,7 @@ a {
   box-sizing: border-box;
 }
 button{
-  border-radius: 8px;
+  border-radius: 4px;
   background: #f0f0f06b;
   padding: 1rem;
   color: white;
@@ -23,7 +23,7 @@ button{
   cursor: pointer;
 }
 input{
-  border-radius: 8px;
+  border-radius: 4px;
   background: #f0f0f06b;
   padding: 1rem;
   color: white;
