@@ -128,6 +128,9 @@
   padding-bottom: 20px;
   max-height: 330px;
 }
+.playlist > *{
+  z-index:3;
+}
 .playlistitems::-webkit-scrollbar {
   width: 1px;
 }
@@ -148,7 +151,6 @@
   font-size: 24px;
 }
 .playlistButton{
-  z-index:3;
   border-radius:8px;
   background: #f0f0f06b;
   padding: 1rem;

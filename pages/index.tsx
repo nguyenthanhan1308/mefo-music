@@ -1,10 +1,17 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import ReactPlayer from "react-player";
+import YTSearch from "youtube-api-search";
+import debounce from "lodash.debounce";
 export default function Home() {
+    // env
+    const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
+    // youtube search
+    const [ytSearchTerm, setYTSearchTerm] = useState("");
+    const [youtubeVideo, setYoutubeVideo] = useState([]);
     // tab state
     const tabTitleList = ["youtube","soundcloud","mp3"];
     const [currentTab, setCurrentTab] = useState("youtube");
@@ -41,17 +48,17 @@ export default function Home() {
     const [playlist, setPlaylist] = useState([
         {
             id:1,
-            name: "My, nah, your playlist",
+            title: "My, nah, your playlist",
             src: "https://www.youtube.com/playlist?list=PLktFEPieLGU-UKQYl2huD770l-yzftC0n",
         },
         { 
             id:2,
-            name: "7UPPERCUTS x Đá Số Tới / Tuyển tập Pop Punks",
+            title: "7UPPERCUTS x Đá Số Tới / Tuyển tập Pop Punks",
             src: "https://youtu.be/22nk6yEPlfA"
         },
         {
             id:3,
-            name: "Lukas Graham - Happy Home", 
+            title: "Lukas Graham - Happy Home", 
             src: "https://youtu.be/QX6UhufF0cs" 
         },
     ]);
@@ -94,6 +101,23 @@ export default function Home() {
             return;
         }
         return;
+    }
+    const onYTSearchTermChange = (e) => {
+        if (!e) return;
+        setYTSearchTerm(e.target.value)
+    }
+    const videoSearch = (term) =>{
+        YTSearch({key:YOUTUBE_API_KEY, term:term}, (videos) => {
+            const resultId = videos[0]?.id?.videoId;
+            const resultTitle = videos[0]?.snippet?.title;
+            const result = {
+                id: resultId,
+                title: resultTitle,
+                src: `youtube.com/watch?v=${resultId}`
+            };
+            const oldPlaylist = playlist;
+            setPlaylist([...oldPlaylist,result])
+        })
     }
     return (
         <div className={styles.container}>
@@ -141,14 +165,22 @@ export default function Home() {
                     <div className={styles.playlist}>
                         <h1>PLAYLIST</h1>
                         <div className={styles.blur}></div>
-                        <button className={styles.playlistButton}>Add new song</button>
+                        <button className={styles.playlistButton} onClick={() => videoSearch(ytSearchTerm)}>
+                            Add new song
+                        </button>
+                        <input
+                            type="text"
+                            placeholder="Type something..."
+                            className={styles.ytSearchInput}
+                            onChange={e => onYTSearchTermChange(e)}
+                        />
                         <div className={styles.playlistitems}>
                             <ol>
                                 {playlist.map(song => (
-                                    <div className={styles.song} key={`container ${song.name}`}>
+                                    <div className={styles.song} key={`container ${song.title}`}>
                                         <Image
                                             alt=""
-                                            key={song.name}
+                                            key={song.title}
                                             onClick={() => playSelectedSong(song.id)}
                                             className={`${styles.songIcon}`}
                                             src={`${
@@ -165,7 +197,7 @@ export default function Home() {
                                             }`}
                                             key={song.id}
                                         >
-                                            <p className={`${styles.songName}`}>{song.name}</p>
+                                            <p className={`${styles.songName}`}>{song.title}</p>
                                         </li>
                                     </div>
                                 ))}
