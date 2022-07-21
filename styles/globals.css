@@ -30,3 +30,7 @@ input{
   outline: none;
   border: none;
 }
+button:hover,input:focus{
+  background: #f0f0f0b9;
+  transition:3s;
+}

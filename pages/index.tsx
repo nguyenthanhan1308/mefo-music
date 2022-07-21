@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import ReactPlayer from "react-player";
 import YTSearch from "youtube-api-search";
-import debounce from "lodash.debounce";
 export default function Home() {
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
@@ -43,7 +42,7 @@ export default function Home() {
             src: "/images/yourname.gif",
         },
     ];
-    const [currentBackground, setCurrentBackground] = useState(backgroundList[0]);
+    const [currentBackground, setCurrentBackground] = useState(backgroundList[1]);
     // playlist state
     const [playlist, setPlaylist] = useState([
         {
@@ -111,6 +110,7 @@ export default function Home() {
         setYTSearchTerm(e.target.value)
     }
     const videoSearch = (term) =>{
+        if(!term) return;
         YTSearch({key:YOUTUBE_API_KEY, term:term}, (videos) => {
             const resultId = videos[0]?.id?.videoId;
             const resultTitle = videos[0]?.snippet?.title;
@@ -180,7 +180,7 @@ export default function Home() {
                             className={`${styles.playlistButton} ${isSearching && styles.hidden}`}
                             onClick={() => setIsSearching(true)}
                         >
-                            Add new song
+                            Search on Youtube
                         </button>
                         <div className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}>
                             <input
@@ -190,7 +190,8 @@ export default function Home() {
                                 value={ytSearchTerm}
                                 onChange={e => onYTSearchTermChange(e)}
                             />
-                            <button onClick={() => videoSearch(ytSearchTerm)}>Confirm</button>
+                            <button onClick={() => videoSearch(ytSearchTerm)}>Search</button>
+                            <button onClick={() => setIsSearching(false)} style={{marginLeft:10}}>Cancel</button>
                         </div>
                         <div className={styles.playlistitems}>
                             <ol>
