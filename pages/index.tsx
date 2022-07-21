@@ -64,6 +64,7 @@ export default function Home() {
                     <div className={styles.tabs}>
                         {tabTitleList.map(tab => (
                             <div
+                                key={tab}
                                 className={`${styles.tab} ${tab === currentTab && styles.currentTab}`}
                                 onClick={() => onTabClick(tab)}
                             >
