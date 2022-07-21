@@ -152,7 +152,7 @@
     --playlistHeight: 35.2em;
     position: absolute;
     width: 37.5em;
-    right: 5em;
+    left: 5em;
     top: 11.3em;
     max-height: 60em;
     height:  var(--playlistHeight);
