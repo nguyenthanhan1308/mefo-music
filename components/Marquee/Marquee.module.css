@@ -79,7 +79,7 @@
 }
 @media only screen and (max-width: 728px) {
     .marqueeContainer {
-    --marqueeHeight: 80px;
+    --marqueeHeight: 100px;
         font-size: 16px;
     }
 }
