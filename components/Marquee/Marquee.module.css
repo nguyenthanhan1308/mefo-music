@@ -1,6 +1,6 @@
 /* marquee */
 .marqueeContainer {
-    --marqueeHeight: 140px;
+    --marqueeHeight: 160px;
     position: relative;
     justify-content: space-between;
     margin-bottom: var(--componentSpacing);
