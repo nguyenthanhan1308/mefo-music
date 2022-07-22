@@ -79,7 +79,7 @@ export default function Home() {
         {
             id: 5,
             title: "7UPPERCUTS - YÊU (OFFICIAL MUSIC VIDEO)",
-            src: "https://www.youtube.com/watch?v=XHZ3kKlpCWw&t=10s",
+            src: "https://youtu.be/XHZ3kKlpCWw",
         },
         {
             id: 6,
