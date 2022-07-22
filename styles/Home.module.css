@@ -77,6 +77,7 @@
   width: 90%;
   height: 100%;
   overflow-y: scroll;
+  overflow-x:hidden;
 }
 .playlistitems::-webkit-scrollbar {
   width: 1px;
@@ -128,8 +129,8 @@
   cursor:pointer;
 }
 .songGif{
-  height:80px!important;
-  width: 80px!important;
+  height:5em!important;
+  width: 5em!important;
 }
 
 /* background */
@@ -156,7 +157,6 @@
   height: 50px;
   width: 50px;
 }
-
 
 /* loading */
 .rainWrapper{
@@ -219,7 +219,7 @@
 
 @media only screen and (max-width: 768px) {
   .wrapper {
-    font-size: 12 px;
+    font-size: 12px;
     width:100%
   }
   .blur{
@@ -228,15 +228,11 @@
   .controllers{
     border-width:8px;
   }
-  /* .playlist{
-    width:100%;
-  }
-  .playlistitems{
-    max-height: 60em;
-    height: var(--playlistHeight);
-  }*/
   .main{
     --componentSpacing: 10px;
     letter-spacing:3px;
+  }
+  .playlist{
+
   }
 } 
