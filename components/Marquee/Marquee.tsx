@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from "./Marquee.module.css";
 export default function Marquee(props) {
-    const {nowPlaying, setNowPlaying, playlist} = props;
-    const isPlaying =true;
+    const {nowPlaying, setNowPlaying, playlist, isPlaying} = props;
     const onPortalClick = action => {
         const nowPlayingIndex = playlist.findIndex(p => p.id === nowPlaying.id);
         if (action === "next") {
