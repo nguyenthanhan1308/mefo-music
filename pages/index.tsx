@@ -143,12 +143,12 @@ export default function Home() {
             }
         })
     };
-    useEffect(()=>{
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false)
-        },10000)
-    },[])
+    // useEffect(()=>{
+    //     setLoading(true);
+    //         setTimeout(() => {
+    //             setLoading(false)
+    //         },10000)
+    // },[])
     return loading?
     <div className={styles.rainWrapper}>
         <Rain/>
@@ -172,61 +172,7 @@ export default function Home() {
             style={{ background: `url(${currentBackground.src})` }}
             >
                 {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />}
-                <div className={styles.playlistWrapper} style={{ display: "flex", flexDirection: "column" }}>
-                    <Tabs className={"zeroOpacity"}></Tabs>
-                    <div className={styles.playlist}>
-                        <h1>PLAYLIST</h1>
-                        <div className={styles.blur}></div>
-                        <button
-                            className={`${styles.playlistButton} ${isSearching && styles.hidden}`}
-                            onClick={() => setIsSearching(true)}
-                        >
-                            Search on Youtube
-                        </button>
-                        <div className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}>
-                            <input
-                                type="text"
-                                placeholder="Type something..."
-                                className={styles.ytSearchInput}
-                                value={ytSearchTerm}
-                                onChange={e => onYTSearchTermChange(e)}
-                            />
-                            <button onClick={() => videoSearch(ytSearchTerm)}>Search</button>
-                            <button onClick={() => setIsSearching(false)} style={{ marginLeft: 10 }}>
-                                Cancel
-                            </button>
-                        </div>
-                        <div className={styles.playlistitems}>
-                            <ol>
-                                {playlist.map(song => (
-                                    <div className={styles.song} key={`container ${song.title}`}>
-                                        <Image
-                                            alt=""
-                                            key={song.title}
-                                            onClick={() => playSelectedSong(song.id)}
-                                            className={`${styles.songIcon}`}
-                                            src={`${
-                                                song.id === nowPlaying.id && isPlaying
-                                                    ? "/playingsound.gif"
-                                                    : "/sound.png"
-                                            }`}
-                                            height={nowPlaying.id === song.id && isPlaying ? 80 : 40}
-                                            width={nowPlaying.id === song.id && isPlaying ? 80 : 40}
-                                        />
-                                        <li
-                                            className={`${song.id === nowPlaying.id ? styles.nowPlaying : ""} ${
-                                                styles.songListItem
-                                            }`}
-                                            key={song.id}
-                                        >
-                                            <p className={`${styles.songName}`}>{song.title}</p>
-                                        </li>
-                                    </div>
-                                ))}
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+        
                 <div className={styles.wrapper}>
                     {/* tab */}
                     <Tabs />
@@ -242,15 +188,69 @@ export default function Home() {
                         className={styles.controllers}
                         playing={isPlaying}
                         controls={true}
+                        width={"100%"}
                         url={nowPlaying.src}
-                        width="100%"
                         onEnded={onNowPlayingEnded}
                         onPause={() => setIsPlaying(false)}
                         onStart={() => setIsPlaying(true)}
                         onPlay={() => setIsPlaying(true)}
                     />
                     {/* playlist */}
-
+                    <div className={styles.playlistWrapper} style={{ display: "flex", flexDirection: "column" }}>
+                        {/* <Tabs className={"zeroOpacity"}></Tabs> */}
+                        <div className={styles.playlist}>
+                            <h1>PLAYLIST</h1>
+                            <div className={styles.blur}></div>
+                            <button
+                                className={`${styles.playlistButton} ${isSearching && styles.hidden}`}
+                                onClick={() => setIsSearching(true)}
+                            >
+                                Search on Youtube
+                            </button>
+                            <div className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}>
+                                <input
+                                    type="text"
+                                    placeholder="Type something..."
+                                    className={styles.ytSearchInput}
+                                    value={ytSearchTerm}
+                                    onChange={e => onYTSearchTermChange(e)}
+                                />
+                                <button onClick={() => videoSearch(ytSearchTerm)}>Search</button>
+                                <button onClick={() => setIsSearching(false)} style={{ marginLeft: 10 }}>
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className={styles.playlistitems}>
+                                <ol>
+                                    {playlist.map(song => (
+                                        <div className={styles.song} key={`container ${song.title}`}>
+                                            <Image
+                                                alt=""
+                                                key={song.title}
+                                                onClick={() => playSelectedSong(song.id)}
+                                                className={`${styles.songIcon}`}
+                                                src={`${
+                                                    song.id === nowPlaying.id && isPlaying
+                                                        ? "/playingsound.gif"
+                                                        : "/sound.png"
+                                                }`}
+                                                height={nowPlaying.id === song.id && isPlaying ? 80 : 40}
+                                                width={nowPlaying.id === song.id && isPlaying ? 80 : 40}
+                                            />
+                                            <li
+                                                className={`${song.id === nowPlaying.id ? styles.nowPlaying : ""} ${
+                                                    styles.songListItem
+                                                }`}
+                                                key={song.id}
+                                            >
+                                                <p className={`${styles.songName}`}>{song.title}</p>
+                                            </li>
+                                        </div>
+                                    ))}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (
