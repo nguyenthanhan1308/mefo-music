@@ -78,8 +78,8 @@
         transform: translateX(-40em)
     }
 }
-@media only screen and (max-width: 1920px) {
+@media only screen and (max-width: 728px) {
     .marqueeContainer {
-        font-size: 12px;
+        font-size: 16px;
     }
 }
