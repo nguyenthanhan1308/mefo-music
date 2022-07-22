@@ -1,6 +1,6 @@
 /* marquee */
 .marqueeContainer {
-    --marqueeHeight: 160px;
+    --marqueeHeight: 200px;
     position: relative;
     justify-content: space-between;
     margin-bottom: var(--componentSpacing);
@@ -26,7 +26,7 @@
 }
 
 .marqueeText {
-    width: 25em;
+    width: 28em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -79,7 +79,7 @@
 }
 @media only screen and (max-width: 728px) {
     .marqueeContainer {
-    --marqueeHeight: 100px;
+    --marqueeHeight: 140px;
         font-size: 16px;
     }
 }
