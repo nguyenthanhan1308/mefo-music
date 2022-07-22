@@ -143,14 +143,17 @@ export default function Home() {
             }
         })
     };
-    // useEffect(()=>{
-    //     setLoading(true);
-    //         setTimeout(() => {
-    //             setLoading(false)
-    //         },10000)
-    // },[])
+    useEffect(()=>{
+        setLoading(true);
+            setTimeout(() => {
+                setLoading(false)
+            },10000)
+    },[])
     return loading ? (
         <div className={styles.rainWrapper}>
+            <audio autoPlay preload="auto" loop>
+                <source src="https://www.soundjay.com/nature/rain-03.mp3" type="audio/mpeg"/>
+            </audio>
             <Rain />
             <div className={styles.loadingWrapper}>
                 <h1 className={styles.loadingText}>L</h1>

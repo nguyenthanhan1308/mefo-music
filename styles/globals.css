@@ -53,7 +53,7 @@ button:hover,input:focus{
 }
 #Rain{
   position:absolute;
-  left: 10%;
+  left: 1%;
 }
 /* drop animation styles */
 @-webkit-keyframes fall {
