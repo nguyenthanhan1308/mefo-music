@@ -4,6 +4,21 @@
   font-weight: 400;
   font-style: normal;
 }
+.rainWrapper{
+  background: black;
+  height:100vh;
+  overflow:hidden;
+  position:relative;
+  color: white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.container{
+  background-color: black;
+  height: 100%;
+  position: relative;
+}
 .blur {
   position: absolute;
   width: 100%;
@@ -159,5 +174,53 @@
   .playlistitems{
     max-height: 60em;
     height: var(--playlistHeight);
+  }
+}
+/* loading */
+.loadingWrapper{
+  display: flex;
+  overflow:hidden;
+  height: 150px;
+}
+.loadingText{
+  margin-top:150px;
+  padding: 0.5em;
+  animation: loading 3s linear infinite;
+  --delayInterval: 0.5s;
+}
+.loadingText:nth-child(2){
+  animation-delay:calc(var(--delayInterval));
+}
+.loadingText:nth-child(3){
+  animation-delay:calc(2*var(--delayInterval));
+}
+.loadingText:nth-child(4){
+  animation-delay:calc(3*var(--delayInterval));
+}
+.loadingText:nth-child(5){
+  animation-delay:calc(4*var(--delayInterval));
+}
+.loadingText:nth-child(6){
+  animation-delay:calc(5*var(--delayInterval));
+} 
+.loadingText:nth-child(7){
+  animation-delay:calc(6*var(--delayInterval));
+}
+.loadingText:nth-child(8){
+  animation-delay:calc(7*var(--delayInterval));
+}
+.loadingText:nth-child(9){
+  animation-delay:calc(8*var(--delayInterval));
+}
+.loadingText:nth-child(10){
+  animation-delay:calc(9*var(--delayInterval));
+} 
+
+@keyframes loading {
+  from{
+    margin-top: -150px;
+  }
+  to{
+    margin-top: 150px;
   }
 }
