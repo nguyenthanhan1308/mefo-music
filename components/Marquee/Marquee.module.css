@@ -26,7 +26,7 @@
 }
 
 .marqueeText {
-    width: 20em;
+    width: 25em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -71,11 +71,11 @@
 
 @keyframes run {
     0% {
-        transform: translateX(35em)
+        transform: translateX(40em)
     }
 
     100% {
-        transform: translateX(-35em)
+        transform: translateX(-40em)
     }
 }
 @media only screen and (max-width: 1920px) {
