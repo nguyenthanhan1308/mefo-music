@@ -51,9 +51,10 @@
 /* audio player */
 .controllers{
   /* width:100%; */
+  /* aspect-ratio: 16/9; */
+  height:60em!important;
   border: 12px solid rgba(255,255,255,0.25);
   border-radius:4px;
-  /* aspect-ratio: 16/9; */
 }
 
 /* playlist */
