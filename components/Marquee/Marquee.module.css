@@ -1,14 +1,18 @@
 /* marquee */
+.marqueeWrapper{
+    width:100%;
+    box-sizing: border-box;
+    min-height: 50px!important;
+    margin-bottom: var(--componentSpacing)
+}
 .marqueeContainer {
-    --marqueeHeight: 200px;
     position: relative;
     justify-content: space-between;
-    margin-bottom: var(--componentSpacing);
     display: flex;
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+    overflow:hidden;
     text-align: center;
-    height: var(--marqueeHeight);
     align-items: center;
     transition: 3s;
 }
@@ -35,7 +39,6 @@
 .portal {
     border-radius: 50%;
     height: 100%;
-    width: 1em;
     border: 2px solid #00c6fd;
     background-image: linear-gradient(to right, #0d81a1, #073846, #041b22);
     animation: rotate 5s linear infinite;
@@ -77,9 +80,9 @@
         transform: translateX(-40em)
     }
 }
-@media only screen and (max-width: 728px) {
+/* @media only screen and (max-width: 728px) {
     .marqueeContainer {
     --marqueeHeight: 140px;
         font-size: 16px;
     }
-}
+} */
