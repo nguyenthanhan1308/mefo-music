@@ -10,8 +10,14 @@
     text-align: center;
     height: var(--marqueeHeight);
     align-items: center;
+    transition: 3s;
 }
-
+.marqueeShowing{
+    opacity: 1;
+}
+.marqueeHidden{
+    opacity: 0;
+}
 .marquee {
     z-index: 2;
     animation: run 9s infinite linear;

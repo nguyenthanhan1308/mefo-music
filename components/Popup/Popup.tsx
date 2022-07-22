@@ -12,6 +12,7 @@ export default function Popup(props) {
     };
     useEffect(()=>{
         renderPopup(type, message);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
         <div className={styles.modal}>

@@ -15,7 +15,7 @@ export default function Marquee(props) {
         }
     };
     return (
-        <div className={styles.marqueeContainer}>
+        <div className={`${styles.marqueeContainer} ${isPlaying ? styles.marqueeShowing : styles.marqueeHidden}`} >
             <button className={styles.portal} onClick={() => onPortalClick("back")} />
             <div className={styles.blur} />
             <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>{nowPlaying.title}</span>
