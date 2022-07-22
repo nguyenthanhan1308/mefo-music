@@ -34,3 +34,7 @@ button:hover,input:focus{
   background: #f0f0f0b9;
   transition:3s;
 }
+.zeroOpacity{
+  opacity: 0;
+  cursor:default;
+}

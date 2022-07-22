@@ -20,6 +20,10 @@
 }
 
 .marqueeText {
+    width: 20em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     font-size: calc(var(--marqueeHeight)/3);
 }
 

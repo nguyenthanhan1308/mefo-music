@@ -149,30 +149,9 @@ export default function Home() {
                 <link rel="icon" href="/song.ico" />
             </Head>
             <main className={styles.main} style={{ background: `url(${currentBackground.src})` }}>
-                {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup}/>}
-                <div className={styles.wrapper}>
-                    {/* tab */}
-                    <Tabs />
-                    {/* marquee */}
-                    <Marquee
-                        isPlaying={isPlaying}
-                        nowPlaying={nowPlaying}
-                        setNowPlaying={setNowPlaying}
-                        playlist={playlist}
-                    />
-                    {/* player */}
-                    <ReactPlayer
-                        className={styles.controllers}
-                        playing={isPlaying}
-                        controls={true}
-                        url={nowPlaying.src}
-                        width="100%"
-                        onEnded={onNowPlayingEnded}
-                        onPause={() => setIsPlaying(false)}
-                        onStart={() => setIsPlaying(true)}
-                        onPlay={() => setIsPlaying(true)}
-                    />
-                    {/* playlist */}
+                {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />}
+                <div className={styles.playlistWrapper} style={{ display: "flex", flexDirection: "column" }}>
+                    <Tabs className={"zeroOpacity"}></Tabs>
                     <div className={styles.playlist}>
                         <h1>PLAYLIST</h1>
                         <div className={styles.blur}></div>
@@ -225,11 +204,37 @@ export default function Home() {
                             </ol>
                         </div>
                     </div>
+                </div>
+                <div className={styles.wrapper}>
+                    {/* tab */}
+                    <Tabs />
+                    {/* marquee */}
+                    <Marquee
+                        isPlaying={isPlaying}
+                        nowPlaying={nowPlaying}
+                        setNowPlaying={setNowPlaying}
+                        playlist={playlist}
+                    />
+                    {/* player */}
+                    <ReactPlayer
+                        className={styles.controllers}
+                        playing={isPlaying}
+                        controls={true}
+                        url={nowPlaying.src}
+                        width="100%"
+                        onEnded={onNowPlayingEnded}
+                        onPause={() => setIsPlaying(false)}
+                        onStart={() => setIsPlaying(true)}
+                        onPlay={() => setIsPlaying(true)}
+                    />
+                    {/* playlist */}
 
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (
+                            // eslint-disable-next-line @next/next/no-img-element
                             <img
+                                alt=""
                                 style={{ zIndex: background.id === currentBackground.id ? 10 : background.id }}
                                 className={styles.backgroundImg}
                                 key={background.title}

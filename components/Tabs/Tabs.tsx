@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styles from "./Tabs.module.css";
-export default function Tabs() {
+export default function Tabs(props) {
+    const {className} =props;
     const tabTitleList = ["youtube", "soundcloud", "mp3"];
     const [currentTab, setCurrentTab] = useState("youtube");
     const onTabClick = tab => {
@@ -10,7 +11,7 @@ export default function Tabs() {
         return;
     };
     return (
-        <div className={styles.tabs}>
+        <div className={`${styles.tabs} ${className}`}>
             {tabTitleList.map(tab => (
                 <div
                     key={tab}
