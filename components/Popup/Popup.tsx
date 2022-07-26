@@ -16,15 +16,15 @@ export default function Popup(props) {
     },[])
     return (
         <div className={styles.modal}>
-            <div className={styles.popup} style={{ justifyContent: type === "YES_NO" ? "space-between" : "" }}>
-                <div
+            <div className={styles.popup} style={{ justifyContent: type === "YES_NO" ? "space-between" : "",  }}>
+                {/* <div
                     className={styles.popupHeader}
                     style={{
                         background: type === "ERROR" ? "#FF5555" : "rgb(83, 126, 243)",
                     }}
                 >
                     <span>{title}</span>
-                </div>
+                </div> */}
                 <div className={styles.popupBody}>
                     <span>{message}</span>
                 </div>
@@ -32,7 +32,7 @@ export default function Popup(props) {
                     {type === "YES_NO" ? (
                         <button className={styles.popupButton} onClick={() => setIsShowPopup(false)}>
                             {" "}
-                            Got it!
+                            Zạ
                         </button>
                     ) : (
                         ""

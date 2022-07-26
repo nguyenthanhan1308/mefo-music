@@ -21,7 +21,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.homeGif{
+  position: absolute;
+  z-index:5;
+}
 .container{
   background-color: black;
   height: 100%;
@@ -224,8 +227,5 @@
   .main{
     --componentSpacing: 10px;
     letter-spacing:3px;
-  }
-  .playlist{
-
   }
 } 

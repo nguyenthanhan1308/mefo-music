@@ -13,13 +13,16 @@
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.452);
     color: white;
+    font-weight: 1000;
     outline: none;
     border: none;
     top:50%;
     left:50%;
-    transform: translate(-50%, -200%);
+    transform: translate(-50%, -125%);
     display:flex;
     flex-direction:column;
+    background-image: url("../../public/images/rain.gif");
+    animation: drop 1.5s ease-out 1;
 }
 .popup > *{
     padding: 0 12px;
@@ -32,11 +35,14 @@
     height: 25%;
     font-weight: bold;
     align-items: center;
+    justify-content: center;
 }
 .popupBody{
     padding-top:8px;
     font-size:20px;
     height:50%;
+    justify-content:center;
+    align-items: center;
 }
 .popupFooter{
     display: flex;
@@ -44,7 +50,14 @@
     padding-bottom: 12px;
 }
 .popupButton{
+    font-weight: 500;
     border-radius: 4px;
-    text-transform: uppercase;
     align-self: flex-end;
+    letter-spacing: 2px;
+}
+@keyframes drop {
+    from {
+        transform: translate(-50%, -500%);
+    }
+
 }

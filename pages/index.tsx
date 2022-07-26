@@ -64,7 +64,6 @@ export default function Home({songs}:Props) {
     const [nowPlaying, setNowPlaying] = useState<Song>(playlist[0]);
 
     // functions
-    const refreshData = () => router.replace(router.asPath);
     const onNowPlayingEnded = () => {
         const nowPlayingIndex = playlist?.findIndex(p => p?.title === nowPlaying?.title)
         if(nowPlayingIndex === (playlist.length-1)){
@@ -81,7 +80,7 @@ export default function Home({songs}:Props) {
         setNowPlaying(selectedSong)
     };
 
-    const loadingPlaylist = async () => {
+    const loadPlaylist = async () => {
         await axios({
             method: 'get',
             url: 'https://mefo-music.herokuapp.com/api/songs',
@@ -112,21 +111,34 @@ export default function Home({songs}:Props) {
             const resultTitle = videos[0]?.snippet?.title;
             const params = {
                 title: resultTitle,
-                src: `www.youtu.be/${resultId}`,
+                src: `https://www.youtu.be/${resultId}`,
             };
-            if (playlist.find(p => p._id === resultId)) {
+            if(!term) {
                 setPopup({
                     title: "Added !",
-                    message: "Already add your song to playlist",
+                    message: "At least type something :D",
                     type: "YES_NO",
-                    time: 3000,
+                });
+                setIsShowPopup(true);
+                return;
+            }
+            if (playlist.find(p => p.src === `https://www.youtu.be/${resultId}`)) {
+                setPopup({
+                    title: "Added !",
+                    message: "Already in playlist!",
+                    type: "YES_NO",
                 });
                 setIsShowPopup(true);
                 return;
             } else {
-                await axios.post('https://mefo-music.herokuapp.com/api/songs', params)
-                    .then(() => {                 loadingPlaylist();  })
-                    .catch(err => { console.log(err.response.data); })
+                await axios
+                    .post("https://mefo-music.herokuapp.com/api/songs", params)
+                    .then(() => {
+                        loadPlaylist();
+                    })
+                    .catch(err => {
+                        console.log(err.response.data);
+                    });
 
                 setIsSearching(false);
                 setYTSearchTerm("");
@@ -165,7 +177,6 @@ export default function Home({songs}:Props) {
             </Head>
             <main className={styles.main} style={{ background: `url(${currentBackground.src})` }}>
                 {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />}
-
                 <div className={styles.wrapper}>
                     {/* tab */}
                     <Tabs />
@@ -201,7 +212,10 @@ export default function Home({songs}:Props) {
                             >
                                 Search on Youtube
                             </button>
-                            <form onSubmit={() => videoSearch(ytSearchTerm, event)} className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}>
+                            <form
+                                onSubmit={() => videoSearch(ytSearchTerm, event)}
+                                className={`${styles.searchGroup} ${!isSearching && styles.hidden}`}
+                            >
                                 <input
                                     type="text"
                                     placeholder="Type something..."
@@ -209,9 +223,7 @@ export default function Home({songs}:Props) {
                                     value={ytSearchTerm}
                                     onChange={e => onYTSearchTermChange(e)}
                                 />
-                                <button type="submit" >
-                                    Search
-                                </button>
+                                <button type="submit">Search</button>
                                 <button type="button" onClick={() => setIsSearching(false)} style={{ marginLeft: 10 }}>
                                     Cancel
                                 </button>
