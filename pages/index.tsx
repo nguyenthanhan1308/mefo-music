@@ -84,7 +84,7 @@ export default function Home({songs}:Props) {
     const loadingPlaylist = async () => {
         await axios({
             method: 'get',
-            url: 'http://localhost:3333/api/songs',
+            url: 'https://mefo-music.herokuapp.com/api/songs',
         }).then(response => {
             setPlaylist(response.data.songs)
         }).catch(err => {
@@ -124,7 +124,7 @@ export default function Home({songs}:Props) {
                 setIsShowPopup(true);
                 return;
             } else {
-                await axios.post('http://localhost:3333/api/songs', params)
+                await axios.post('https://mefo-music.herokuapp.com/api/songs', params)
                     .then(() => {                 loadingPlaylist();  })
                     .catch(err => { console.log(err.response.data); })
 
@@ -270,7 +270,7 @@ export default function Home({songs}:Props) {
 export const getServerSideProps = async () => {
     const songs = await axios({
         method: 'get',
-        url: 'http://localhost:3333/api/songs',
+        url: 'https://mefo-music.herokuapp.com/api/songs',
     }).then(response => {
         return response.data.songs;
     }).catch(err => {
