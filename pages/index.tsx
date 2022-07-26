@@ -21,7 +21,7 @@ export default function Home({songs}:Props) {
     const router = useRouter();
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
     // modal state
