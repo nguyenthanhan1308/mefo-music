@@ -19,7 +19,7 @@ export default function Marquee(props) {
             <div className={`${styles.marqueeContainer} ${isPlaying ? styles.marqueeShowing : styles.marqueeHidden}`} >
                 <button type={"button"} className={styles.portal} onClick={() => onPortalClick("back")} />
                 <div className={styles.blur} />
-                <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>{nowPlaying.title}</span>
+                <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>{nowPlaying?.title}</span>
                 <button type={"button"}  className={styles.portal} onClick={() => onPortalClick("next")} />
             </div>
         </div>

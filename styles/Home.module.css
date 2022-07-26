@@ -68,7 +68,7 @@
   align-items: center;
   position: relative;
   width: 100%;
-  max-height: 50%;
+  height: 50%;
   padding-bottom: 20px;
 }
 .playlist > *{
@@ -114,7 +114,7 @@
 }
 .songListItem{
   width: 70%;
-  margin-left:2.5em;
+  margin-left:4em;
 }
 .songName{
   text-overflow: ellipsis;
