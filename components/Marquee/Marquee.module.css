@@ -16,6 +16,10 @@
     align-items: center;
     transition: 3s;
 }
+.tabHidden {
+    opacity: 0 !important;
+    z-index: -1 !important;
+}
 .marqueeShowing{
     opacity: 1;
 }

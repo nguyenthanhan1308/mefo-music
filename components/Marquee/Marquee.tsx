@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Marquee.module.css";
 export default function Marquee(props) {
-    const {nowPlaying, setNowPlaying, playlist, isPlaying} = props;
+    const {nowPlaying, setNowPlaying, playlist, isPlaying, currentTab} = props;
     const onPortalClick = action => {
         const nowPlayingIndex = playlist.findIndex(p => p.id === nowPlaying.id);
         if (action === "next") {
@@ -16,7 +16,7 @@ export default function Marquee(props) {
     };
     return (
         <div className={styles.marqueeWrapper}>
-            <div className={`${styles.marqueeContainer} ${isPlaying ? styles.marqueeShowing : styles.marqueeHidden}`} >
+            <div className={`${styles.marqueeContainer} ${currentTab==="music" ? "" : styles.tabHidden} ${isPlaying ? styles.marqueeShowing : styles.marqueeHidden}`} >
                 <button type={"button"} className={styles.portal} onClick={() => onPortalClick("back")} />
                 <div className={styles.blur} />
                 <span className={`${isPlaying && styles.marquee} ${styles.marqueeText}`}>{nowPlaying?.title}</span>

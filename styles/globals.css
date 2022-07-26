@@ -34,11 +34,6 @@ button:hover,input:focus{
   background: #f0f0f0b9;
   transition:3s;
 }
-.zeroOpacity{
-  opacity: 0;
-  cursor:default;
-}
-
 .drop {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(13, 52, 58, 1)), to(rgba(255, 255, 255, 0.5)));
   /* background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.5) 100%); */

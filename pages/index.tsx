@@ -13,7 +13,6 @@ import Tabs from "../components/Tabs/Tabs";
 import Marquee from "../components/Marquee/Marquee";
 import Popup from "../components/Popup/Popup";
 import {Song} from "./typing";
-
 interface Props {
     songs: [Song];
 }
@@ -23,6 +22,8 @@ export default function Home({songs}:Props) {
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
     const [loading, setLoading] = useState(false);
+    // tab
+    const [currentTab, setCurrentTab] = useState("music");
     // modal state
     const [popup, setPopup] = useState({});
     const [isShowPopup, setIsShowPopup] = useState(false);
@@ -145,12 +146,12 @@ export default function Home({songs}:Props) {
             }
         });
     };
-    useEffect(()=>{
-        setLoading(true);
-            setTimeout(() => {
-                setLoading(false)
-            },10000)
-    },[]);
+    // useEffect(()=>{
+    //     setLoading(true);
+    //         setTimeout(() => {
+    //             setLoading(false)
+    //         },10000)
+    // },[]);
 
     return loading ? (
         <div className={styles.rainWrapper}>
@@ -179,28 +180,30 @@ export default function Home({songs}:Props) {
                 {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />}
                 <div className={styles.wrapper}>
                     {/* tab */}
-                    <Tabs />
+                    <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+                    {/* music tab */}
                     {/* marquee */}
                     <Marquee
                         isPlaying={isPlaying}
                         nowPlaying={nowPlaying}
                         setNowPlaying={setNowPlaying}
                         playlist={playlist}
+                        currentTab={currentTab}
                     />
                     {/* player */}
                     <ReactPlayer
-                        className={styles.controllers}
+                        className={`${currentTab === "music" ? styles.controllers : styles.tabHidden}`}
                         playing={isPlaying}
                         controls={true}
                         url={nowPlaying.src}
+                        // stopOnUnmount={false}
                         onEnded={onNowPlayingEnded}
                         onPause={() => setIsPlaying(false)}
                         onStart={() => setIsPlaying(true)}
                         onPlay={() => setIsPlaying(true)}
                     />
-
                     {/* playlist */}
-                    <div className={styles.playlistWrapper} style={{ display: "flex", flexDirection: "column" }}>
+                    <div className={`${styles.playlistWrapper} ${currentTab==="music" ? "": styles.tabHidden}`} style={{ display: "flex", flexDirection: "column" }}>
                         {/* <Tabs className={"zeroOpacity"}></Tabs> */}
                         <div className={styles.playlist}>
                             <h2>PLAYLIST</h2>

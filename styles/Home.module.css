@@ -41,28 +41,37 @@
 .hidden {
   display: none !important;
 }
-
+.tabHidden{
+  opacity: 0!important; 
+  z-index: -1!important;
+}
 .wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 35%;
   height: 100%;
+
   /* justify-content: space-between; */
 }
-
+/* tab */
+.tabMusic {
+  width:100%;
+}
 /* audio player */
 .controllers{
   width: 100% !important;
   border: 12px solid rgba(255,255,255,0.25);
   border-radius:4px;
   min-height: 300px !important;
+  transition: 3s;
 }
 
 /* playlist */
 .playlistWrapper{
   width: 100%;
   margin-top: calc(var(--componentSpacing));
+  transition: 3s;
 }
 .playlist{
   font-size:14px;

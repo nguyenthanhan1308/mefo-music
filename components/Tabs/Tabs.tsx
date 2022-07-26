@@ -1,9 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styles from "./Tabs.module.css";
-export default function Tabs(props) {
-    const {className} =props;
-    const tabTitleList = ["youtube", "soundcloud", "mp3"];
-    const [currentTab, setCurrentTab] = useState("youtube");
+export default function Tabs({currentTab,setCurrentTab}) {
+    const tabTitleList = ["music", "book", "stream"];
     const onTabClick = tab => {
         if (tab !== currentTab) {
             setCurrentTab(tab);
@@ -11,7 +9,7 @@ export default function Tabs(props) {
         return;
     };
     return (
-        <div className={`${styles.tabs} ${className}`}>
+        <div className={`${styles.tabs}`}>
             {tabTitleList.map(tab => (
                 <div
                     key={tab}
