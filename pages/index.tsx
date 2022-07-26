@@ -112,7 +112,7 @@ export default function Home({songs}:Props) {
             const resultTitle = videos[0]?.snippet?.title;
             const params = {
                 title: resultTitle,
-                src: `youtube.com/watch?v=${resultId}`,
+                src: `www.youtu.be/${resultId}`,
             };
             if (playlist.find(p => p._id === resultId)) {
                 setPopup({
