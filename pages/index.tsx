@@ -152,10 +152,10 @@ export default function Home({songs}:Props) {
         });
     };
     useEffect(()=>{
-        // setLoading(true);
-        //         setTimeout(() => {
-        //         setLoading(false);
-        //     },10000)
+        setLoading(true);
+                setTimeout(() => {
+                setLoading(false);
+            },10000)
         const time = new Date().getHours();
         if (time >= 4 && time < 11) {
             setTimeQuotes("Good morning lady !");
