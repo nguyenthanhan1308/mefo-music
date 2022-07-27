@@ -22,6 +22,7 @@ export default function Home({songs}:Props) {
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
     const [loading, setLoading] = useState(true);
+    const [playlistLoading, setPlaylistLoading] = useState(false);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
     // modal state
@@ -62,7 +63,7 @@ export default function Home({songs}:Props) {
     // playlist state
     const [playlist, setPlaylist] = useState<Song[]>(songs);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [nowPlaying, setNowPlaying] = useState<Song>();
+    const [nowPlaying, setNowPlaying] = useState<Song>(playlist[0]);
 
     // functions
     const onNowPlayingEnded = () => {
@@ -80,11 +81,20 @@ export default function Home({songs}:Props) {
         setIsPlaying(true);
         setNowPlaying(selectedSong)
     };
-    // const deleteSelectedSong = async (_id) => {
-    //     await axios.delete()
-    //     setIsPlaying(true);
-    //     setNowPlaying(selectedSong)
-    // };
+    const deleteSelectedSong = async (_id) => {
+        setPlaylistLoading(true);
+        await axios({
+            method: 'delete',
+            url: 'https://mefo-music.herokuapp.com/api/songs',
+            data: {
+                _id: _id
+            }
+        }).then(() => {
+            loadPlaylist();
+        }).catch(err => {
+            console.log(err)
+        });
+    };
 
     const loadPlaylist = async () => {
         await axios({
@@ -92,7 +102,7 @@ export default function Home({songs}:Props) {
             url: 'https://mefo-music.herokuapp.com/api/songs',
         }).then(response => {
             setPlaylist(response.data.songs);
-            setNowPlaying(response.data.songs[0]);
+            setPlaylistLoading(false)
         }).catch(err => {
             console.log(err)
         });
@@ -112,6 +122,7 @@ export default function Home({songs}:Props) {
     };
 
     const videoSearch = async (term: string, event) => {
+        setPlaylistLoading(true);
         event.preventDefault();
         await YTSearch({ key: YOUTUBE_API_KEY, term: term }, async videos => {
             const resultId = videos[0]?.id?.videoId;
@@ -235,7 +246,6 @@ export default function Home({songs}:Props) {
                         className={`${styles.playlistWrapper} ${currentTab === "music" ? "" : styles.tabHidden}`}
                         style={{ display: "flex", flexDirection: "column" }}
                     >
-                        {/* <Tabs className={"zeroOpacity"}></Tabs> */}
                         <div className={styles.playlist}>
                             <h2>PLAYLIST</h2>
                             <div className={styles.blur}></div>
@@ -253,12 +263,28 @@ export default function Home({songs}:Props) {
                                 <input
                                     type="text"
                                     placeholder="Type something..."
-                                    className={styles.ytSearchInput}
+                                    readOnly={playlistLoading}
+                                    className={`${styles.ytSearchInput} ${
+                                        playlistLoading ? styles.loadingPlaylist : ""
+                                    }`}
                                     value={ytSearchTerm}
                                     onChange={e => onYTSearchTermChange(e)}
                                 />
-                                <button type="submit">Search</button>
-                                <button type="button" onClick={() => setIsSearching(false)} style={{ marginLeft: 10 }}>
+                                <button
+                                    type="submit"
+                                    disabled={playlistLoading}
+                                    className={`${playlistLoading ? styles.loadingPlaylist : ""}`}
+                                >
+                                    Search
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsSearching(false)}
+                                    disabled={playlistLoading}
+                                    className={`${styles.cancelButton} ${
+                                        playlistLoading ? styles.loadingPlaylist : ""
+                                    }`}
+                                >
                                     Cancel
                                 </button>
                             </form>
@@ -270,7 +296,9 @@ export default function Home({songs}:Props) {
                                                 alt=""
                                                 key={song.title}
                                                 onClick={() => playSelectedSong(song._id)}
-                                                className={`${styles.songIcon}`}
+                                                className={`${styles.songIcon} ${
+                                                    playlistLoading ? styles.loadingPlaylist : ""
+                                                }`}
                                                 src={`${
                                                     song._id === nowPlaying?._id && isPlaying
                                                         ? "/images/playingsound.gif"
@@ -279,22 +307,29 @@ export default function Home({songs}:Props) {
                                                 height={nowPlaying?._id === song._id && isPlaying ? 60 : 30}
                                                 width={nowPlaying?._id === song._id && isPlaying ? 60 : 30}
                                             />
-                                            <li
-                                                className={`${song._id === nowPlaying?._id ? styles.nowPlaying : ""} ${
-                                                    styles.songListItem
-                                                }`}
-                                                key={song._id}
-                                            >
-                                                <p className={`${styles.songName}`}>{song.title}</p>
-                                            </li>
+                                            {playlistLoading ? (
+                                                <p className={styles.playlistLoading}></p>
+                                            ) : (
+                                                <li
+                                                    className={`${
+                                                        song._id === nowPlaying?._id ? styles.nowPlaying : ""
+                                                    } ${styles.songListItem}`}
+                                                    key={song._id}
+                                                >
+                                                    <p className={`${styles.songName}`}>{song.title}</p>
+                                                </li>
+                                            )}
+
                                             <Image
                                                 alt=""
                                                 key={song.title}
-                                                // onClick={() => deleteSelectedSong(song._id)}
-                                                className={`${styles.songDeleteIcon}`}
-                                                src={`${ "/images/delete.png" }`}
-                                                height={25}
-                                                width={25}
+                                                onClick={() => deleteSelectedSong(song._id)}
+                                                className={`${styles.songDeleteIcon} ${
+                                                    playlistLoading ? styles.loadingPlaylist : ""
+                                                }`}
+                                                src={`${"/images/delete.png"}`}
+                                                height={22}
+                                                width={22}
                                             />
                                         </div>
                                     ))}
