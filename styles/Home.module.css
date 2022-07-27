@@ -4,6 +4,13 @@
   font-weight: 400;
   font-style: normal;
 }
+.fullOpacity{
+  opacity: 1!important;
+}
+.blurOpacity{
+  opacity: 0.3;
+}
+
 .main {
   position: relative;
   --componentSpacing: 20px;
@@ -161,9 +168,7 @@
 .songIcon{
   position:absolute;
   cursor:pointer;
-  opacity: 0.3;
   transition: 2s;
-
 }
 .songDeleteIcon{
   opacity: 0.3;
@@ -288,3 +293,8 @@
   }
 } 
 
+
+                                                    
+                                                       
+                                                       
+                                                
