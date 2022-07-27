@@ -67,7 +67,7 @@ export default function Home({songs}:Props) {
 
     // functions
     const onNowPlayingEnded = () => {
-        const nowPlayingIndex = playlist?.findIndex(p => p?.title === nowPlaying?.title)
+        const nowPlayingIndex = playlist.findIndex(p => p?._id === nowPlaying?._id)
         if(nowPlayingIndex === (playlist.length-1)){
             setNowPlaying(playlist[0])
             return;
@@ -83,6 +83,16 @@ export default function Home({songs}:Props) {
     };
     const deleteSelectedSong = async (_id) => {
         setPlaylistLoading(true);
+        const deleteIndex = playlist.findIndex(p => p?._id === _id);
+        const deleteSong = playlist.find(p => p?._id === _id);
+        if(deleteSong?._id === nowPlaying?._id && isPlaying){
+            if(deleteIndex === playlist.length-1) {
+                setNowPlaying(playlist[deleteIndex-1])
+            }
+            else{
+                setNowPlaying(playlist[deleteIndex+1])
+            }
+        }   
         await axios({
             method: 'delete',
             url: 'https://mefo-music.herokuapp.com/api/songs',
@@ -91,7 +101,7 @@ export default function Home({songs}:Props) {
             }
         }).then(() => {
             loadPlaylist();
-        }).catch(err => {
+        }).catch(err => {   
             console.log(err)
         });
     };
