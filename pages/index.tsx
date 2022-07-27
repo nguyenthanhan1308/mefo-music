@@ -18,10 +18,10 @@ interface Props {
 }
 
 export default function Home({songs}:Props) {
-    const router = useRouter();
+    const [timeQuotes, setTimeQuotes] = useState<String>("");
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
     // modal state
@@ -80,11 +80,16 @@ export default function Home({songs}:Props) {
         setIsPlaying(true);
         setNowPlaying(selectedSong)
     };
+    // const deleteSelectedSong = async (_id) => {
+    //     await axios.delete()
+    //     setIsPlaying(true);
+    //     setNowPlaying(selectedSong)
+    // };
 
     const loadPlaylist = async () => {
         await axios({
             method: 'get',
-            url: 'https://mefo-music.herokuapp.com/api/songs',
+            url: '/audio/rain.mp3',
         }).then(response => {
             setPlaylist(response.data.songs)
         }).catch(err => {
@@ -147,10 +152,31 @@ export default function Home({songs}:Props) {
         });
     };
     useEffect(()=>{
-        setLoading(true);
-            setTimeout(() => {
-                setLoading(false)
-            },10000)
+        // setLoading(true);
+        //         setTimeout(() => {
+        //         setLoading(false);
+        //     },10000)
+        const time = new Date().getHours();
+        if (time >= 4 && time < 11) {
+            setTimeQuotes("Good morning lady !");
+            return;
+        }
+        if (time >= 11 && time < 13) {
+            setTimeQuotes("Go take a nap !");
+            return;
+        }
+        if (time >= 13 && time < 17) {
+            setTimeQuotes("Do your best !");
+            return;
+        }
+        if (time >= 17 && time < 23) {
+            setTimeQuotes("Well done, let's go home!");
+            return;
+        }
+        if (time >= 23 && time < 4) {
+            setTimeQuotes("Why are you still here ? Go to bed !");
+            return;
+        }
     },[]);
 
     return loading ? (
@@ -177,10 +203,11 @@ export default function Home({songs}:Props) {
                 <link rel="icon" href="/song.ico" />
             </Head>
             <main className={styles.main} style={{ background: `url(${currentBackground.src})` }}>
+                <p className={styles.timeQuotes}>{timeQuotes}</p>
                 {isShowPopup && <Popup popup={popup} isShowPopup={isShowPopup} setIsShowPopup={setIsShowPopup} />}
                 <div className={styles.wrapper}>
                     {/* tab */}
-                    <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+                    <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
                     {/* music tab */}
                     {/* marquee */}
                     <Marquee
@@ -203,7 +230,10 @@ export default function Home({songs}:Props) {
                         onPlay={() => setIsPlaying(true)}
                     />
                     {/* playlist */}
-                    <div className={`${styles.playlistWrapper} ${currentTab==="music" ? "": styles.tabHidden}`} style={{ display: "flex", flexDirection: "column" }}>
+                    <div
+                        className={`${styles.playlistWrapper} ${currentTab === "music" ? "" : styles.tabHidden}`}
+                        style={{ display: "flex", flexDirection: "column" }}
+                    >
                         {/* <Tabs className={"zeroOpacity"}></Tabs> */}
                         <div className={styles.playlist}>
                             <h2>PLAYLIST</h2>
@@ -242,8 +272,8 @@ export default function Home({songs}:Props) {
                                                 className={`${styles.songIcon}`}
                                                 src={`${
                                                     song._id === nowPlaying._id && isPlaying
-                                                        ? "/playingsound.gif"
-                                                        : "/sound.png"
+                                                        ? "/images/playingsound.gif"
+                                                        : "/images/sound.png"
                                                 }`}
                                                 height={nowPlaying._id === song._id && isPlaying ? 60 : 30}
                                                 width={nowPlaying._id === song._id && isPlaying ? 60 : 30}
@@ -256,6 +286,15 @@ export default function Home({songs}:Props) {
                                             >
                                                 <p className={`${styles.songName}`}>{song.title}</p>
                                             </li>
+                                            <Image
+                                                alt=""
+                                                key={song.title}
+                                                // onClick={() => deleteSelectedSong(song._id)}
+                                                className={`${styles.songDeleteIcon}`}
+                                                src={`${ "/images/delete.png" }`}
+                                                height={25}
+                                                width={25}
+                                            />
                                         </div>
                                     ))}
                                 </ol>
