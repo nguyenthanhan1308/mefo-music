@@ -291,10 +291,18 @@
     --componentSpacing: 10px;
     letter-spacing:3px;
   }
+  .songListItem{
+    width: 70%;
+    margin-left:2.7em;
+    margin-right: 1em;
+  }
+  .playlistitems{
+    width:100%;
+  }
+  .playlistitems>ol{
+    padding:0 5px;
+  }
+  .timeQuotes{
+    display:none;
+  }
 } 
-
-
-                                                    
-                                                       
-                                                       
-                                                
