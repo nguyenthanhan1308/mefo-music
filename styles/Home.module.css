@@ -95,8 +95,8 @@
   align-items: center;
   position: relative;
   width: 100%;
-  min-height:42%;
-  max-height: 42%;
+  min-height:25%;
+  max-height: 28%;
   padding-bottom: 20px;
 }
 .playlist > *{

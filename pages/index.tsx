@@ -342,8 +342,8 @@ export default function Home({songs}:Props) {
                                                     playlistLoading ? styles.loadingPlaylist : ""
                                                 }`}
                                                 src={`${"/images/delete.png"}`}
-                                                height={22}
-                                                width={22}
+                                                height={30}
+                                                width={30}
                                             />
                                         </div>
                                     ))}
