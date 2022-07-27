@@ -21,7 +21,7 @@ export default function Home({songs}:Props) {
     const [timeQuotes, setTimeQuotes] = useState<String>("");
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
     // modal state
@@ -62,7 +62,7 @@ export default function Home({songs}:Props) {
     // playlist state
     const [playlist, setPlaylist] = useState<Song[]>(songs);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [nowPlaying, setNowPlaying] = useState<Song>(playlist[0]);
+    const [nowPlaying, setNowPlaying] = useState<Song>();
 
     // functions
     const onNowPlayingEnded = () => {
@@ -75,7 +75,7 @@ export default function Home({songs}:Props) {
     };
 
     const playSelectedSong = (_id) => {
-        if(isPlaying && _id === nowPlaying._id) return;
+        if(isPlaying && _id === nowPlaying?._id) return;
         const selectedSong = playlist.find(p=>p._id === _id)
         setIsPlaying(true);
         setNowPlaying(selectedSong)
@@ -89,9 +89,10 @@ export default function Home({songs}:Props) {
     const loadPlaylist = async () => {
         await axios({
             method: 'get',
-            url: '/audio/rain.mp3',
+            url: 'https://mefo-music.herokuapp.com/api/songs',
         }).then(response => {
-            setPlaylist(response.data.songs)
+            setPlaylist(response.data.songs);
+            setNowPlaying(response.data.songs[0]);
         }).catch(err => {
             console.log(err)
         });
@@ -182,7 +183,7 @@ export default function Home({songs}:Props) {
     return loading ? (
         <div className={styles.rainWrapper}>
             <audio autoPlay preload="auto" loop>
-                <source src="https://www.soundjay.com/nature/rain-03.mp3" type="audio/mpeg" />
+                <source src="/audio/rain.mp3" type="audio/mpeg" />
             </audio>
             <Rain />
             <div className={styles.loadingWrapper}>
@@ -222,7 +223,7 @@ export default function Home({songs}:Props) {
                         className={`${currentTab === "music" ? styles.controllers : styles.tabHidden}`}
                         playing={isPlaying}
                         controls={true}
-                        url={nowPlaying.src}
+                        url={nowPlaying?.src}
                         // stopOnUnmount={false}
                         onEnded={onNowPlayingEnded}
                         onPause={() => setIsPlaying(false)}
@@ -271,15 +272,15 @@ export default function Home({songs}:Props) {
                                                 onClick={() => playSelectedSong(song._id)}
                                                 className={`${styles.songIcon}`}
                                                 src={`${
-                                                    song._id === nowPlaying._id && isPlaying
+                                                    song._id === nowPlaying?._id && isPlaying
                                                         ? "/images/playingsound.gif"
                                                         : "/images/sound.png"
                                                 }`}
-                                                height={nowPlaying._id === song._id && isPlaying ? 60 : 30}
-                                                width={nowPlaying._id === song._id && isPlaying ? 60 : 30}
+                                                height={nowPlaying?._id === song._id && isPlaying ? 60 : 30}
+                                                width={nowPlaying?._id === song._id && isPlaying ? 60 : 30}
                                             />
                                             <li
-                                                className={`${song._id === nowPlaying._id ? styles.nowPlaying : ""} ${
+                                                className={`${song._id === nowPlaying?._id ? styles.nowPlaying : ""} ${
                                                     styles.songListItem
                                                 }`}
                                                 key={song._id}
