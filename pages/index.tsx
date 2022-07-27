@@ -298,9 +298,13 @@ export default function Home({songs}:Props) {
                                                 onClick={() => playSelectedSong(song._id)}
                                                 className={`${styles.songIcon} ${
                                                     playlistLoading ? styles.loadingPlaylist : ""
-                                                } ${(song._id === nowPlaying?._id && isPlaying )? styles.fullOpacity : styles.blurOpacity}`}
+                                                } ${
+                                                    song._id === nowPlaying?._id && isPlaying
+                                                        ? styles.fullOpacity
+                                                        : styles.blurOpacity
+                                                }`}
                                                 src={`${
-                                                    (song._id === nowPlaying?._id && isPlaying)
+                                                    song._id === nowPlaying?._id && isPlaying
                                                         ? "/images/playingsound.gif"
                                                         : "/images/sound.png"
                                                 }`}
@@ -337,7 +341,7 @@ export default function Home({songs}:Props) {
                             </div>
                         </div>
                     </div>
-                    <p className={styles.credit}>{`By me, for me, for you.`}</p>
+                    <p className={styles.credit}>{`By me, for you, for me.`}</p>
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (
