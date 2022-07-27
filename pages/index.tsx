@@ -301,7 +301,7 @@ export default function Home({songs}:Props) {
                             </div>
                         </div>
                     </div>
-                    <p className={styles.credit}>{`By me, for me, for you`}</p>
+                    <p className={styles.credit}>{`By me, for me, for you.`}</p>
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (
