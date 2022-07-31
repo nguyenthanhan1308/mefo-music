@@ -148,6 +148,7 @@ export default function Home({songs}:Props) {
                     type: "YES_NO",
                 });
                 setIsShowPopup(true);
+                setPlaylistLoading(false);
                 return;
             }
             if (playlist.find(p => p.src === `https://www.youtu.be/${resultId}`)) {
@@ -157,6 +158,7 @@ export default function Home({songs}:Props) {
                     type: "YES_NO",
                 });
                 setIsShowPopup(true);
+                setPlaylistLoading(false);
                 return;
             } else {
                 await axios
@@ -167,7 +169,6 @@ export default function Home({songs}:Props) {
                     .catch(err => {
                         console.log(err.response.data);
                     });
-
                 setIsSearching(false);
                 setYTSearchTerm("");
             }
