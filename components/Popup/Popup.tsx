@@ -32,7 +32,7 @@ export default function Popup(props) {
                     {type === "YES_NO" ? (
                         <button className={styles.popupButton} onClick={() => setIsShowPopup(false)}>
                             {" "}
-                            Zạ
+                            Dzạ
                         </button>
                     ) : (
                         ""
