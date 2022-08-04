@@ -65,7 +65,7 @@
   position: absolute;
   left: 5%;
 }
-.credit{
+.footer{
   position: absolute;
   bottom: 0;
 }
@@ -87,6 +87,7 @@
   width: 100%;
   margin-top: calc(var(--componentSpacing));
   transition: 3s;
+  height: 100%;
 }
 .playlist{
   font-size:14px;
@@ -95,7 +96,7 @@
   align-items: center;
   position: relative;
   width: 100%;
-  min-height:25%;
+  min-height: 25%;
   max-height: 28%;
   padding-bottom: 20px;
 }

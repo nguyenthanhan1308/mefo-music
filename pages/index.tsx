@@ -21,7 +21,7 @@ export default function Home({songs}:Props) {
     const [timeQuotes, setTimeQuotes] = useState<String>("");
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [playlistLoading, setPlaylistLoading] = useState(false);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
@@ -55,8 +55,8 @@ export default function Home({songs}:Props) {
         },
         {
             _id: 5,
-            title: "your name",
-            src: "/images/yourname.gif",
+            title: "cafe",
+            src: "/images/cafe.gif",
         },
     ];
     const [currentBackground, setCurrentBackground] = useState(backgroundList[1]);
@@ -75,13 +75,13 @@ export default function Home({songs}:Props) {
         setNowPlaying(playlist[nowPlayingIndex+1]);
     };
 
-    const playSelectedSong = (_id) => {
+    const playSelectedSong = (_id: string) => {
         if(isPlaying && _id === nowPlaying?._id) return;
         const selectedSong = playlist.find(p=>p._id === _id)
         setIsPlaying(true);
         setNowPlaying(selectedSong)
     };
-    const deleteSelectedSong = async (_id) => {
+    const deleteSelectedSong = async (_id: string) => {
         setPlaylistLoading(true);
         const deleteIndex = playlist.findIndex(p => p?._id === _id);
         const deleteSong = playlist.find(p => p?._id === _id);
@@ -118,21 +118,24 @@ export default function Home({songs}:Props) {
         });
     }
 
-    const setSelectedBackground = (_id) => {
+    const setSelectedBackground = (_id : number) => {
         if(_id !== currentBackground._id) {
             const selectedBackground = backgroundList.find(p => p._id === _id);
             setCurrentBackground(selectedBackground);
-            return;
         }
-        return;
+        else return;
     };
 
     const onYTSearchTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setYTSearchTerm(e.target.value)
     };
 
-    const videoSearch = async (term: string, event) => {
-        setPlaylistLoading(true);
+    const resetSearchTerm = () => {
+        setPlaylistLoading(false);
+        setYTSearchTerm("");
+    }
+
+    const videoSearch = async (term: string, event ) => {
         event.preventDefault();
         await YTSearch({ key: YOUTUBE_API_KEY, term: term }, async videos => {
             const resultId = videos[0]?.id?.videoId;
@@ -143,62 +146,60 @@ export default function Home({songs}:Props) {
             };
             if(!term) {
                 setPopup({
-                    title: "Added !",
                     message: "At least type something :D",
                     type: "YES_NO",
                 });
                 setIsShowPopup(true);
                 setPlaylistLoading(false);
-                return;
             }
-            if (playlist.find(p => p.src === `https://www.youtu.be/${resultId}`)) {
+            else if (playlist.find(p => p.src === `https://www.youtu.be/${resultId}`)) {
                 setPopup({
-                    title: "Added !",
                     message: "Already in playlist!",
                     type: "YES_NO",
                 });
                 setIsShowPopup(true);
-                setPlaylistLoading(false);
-                return;
-            } else {
+            } 
+            else {
+                setPlaylistLoading(true);
                 await axios
                     .post("https://mefo-music.herokuapp.com/api/songs", params)
                     .then(() => {
                         loadPlaylist();
+                        setIsSearching(false);
                     })
                     .catch(err => {
+                        setPopup({
+                            message: "Failed to get playlist!",
+                            type: "ERROR",
+                        });
                         console.log(err.response.data);
                     });
-                setIsSearching(false);
-                setYTSearchTerm("");
-            }
+                }
+            resetSearchTerm();
         });
     };
     useEffect(()=>{
-        setLoading(true);
-                setTimeout(() => {
-                setLoading(false);
-            },10000)
+        // setLoading(true);
+        //     setTimeout(() => {
+        //     setLoading(false);
+        // },10000)
         const time = new Date().getHours();
-        if (time >= 4 && time < 11) {
-            setTimeQuotes("Good morning lady !");
-            return;
-        }
-        if (time >= 11 && time < 13) {
-            setTimeQuotes("Go take a nap !");
-            return;
-        }
-        if (time >= 13 && time < 17) {
-            setTimeQuotes("Do your best !");
-            return;
-        }
-        if (time >= 17 && time < 23) {
-            setTimeQuotes("Well done, let's go home!");
-            return;
-        }
-        if (time >= 23 && time < 4) {
-            setTimeQuotes("Why are you still here ? Go to bed !");
-            return;
+        switch (true) {
+            case time >= 4 && time < 11:
+                setTimeQuotes("Good morning lady !");
+                break;
+            case (time >= 11 && time < 13) :
+                setTimeQuotes("Go take a nap !");
+                break;
+            case (time >= 13 && time < 17) :
+                setTimeQuotes("Do your best !");
+                break;
+            case (time >= 17 && time < 23) :
+                setTimeQuotes("Well done, let's go home!");
+                break;
+            case (time >= 23 && time < 4) :
+                setTimeQuotes("Why are you still here ? Go to bed !");
+                break;
         }
     },[]);
 
@@ -323,7 +324,7 @@ export default function Home({songs}:Props) {
                                                 width={nowPlaying?._id === song._id && isPlaying ? 60 : 30}
                                             />
                                             {playlistLoading ? (
-                                                <p className={styles.playlistLoading}></p>
+                                                <div className={styles.playlistLoading}></div>
                                             ) : (
                                                 <li
                                                     className={`${
@@ -334,7 +335,6 @@ export default function Home({songs}:Props) {
                                                     <p className={`${styles.songName}`}>{song.title}</p>
                                                 </li>
                                             )}
-
                                             <Image
                                                 alt=""
                                                 key={song.title}
@@ -352,7 +352,7 @@ export default function Home({songs}:Props) {
                             </div>
                         </div>
                     </div>
-                    <p className={styles.credit}>{`By me, for you, for me.`}</p>
+                    <p className={styles.footer}>{`By me, for you, for me.`}</p>
                     {/* background */}
                     <div className={styles.background}>
                         {backgroundList.map(background => (
@@ -380,7 +380,8 @@ export const getServerSideProps = async () => {
     }).then(response => {
         return response.data.songs;
     }).catch(err => {
-        console.log(err)
+        console.log(err);
+        return [];
     });
     return {
         props: {songs}
