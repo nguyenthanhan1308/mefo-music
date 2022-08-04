@@ -1,17 +1,19 @@
-import Image from 'next/image';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
-import React from 'react';
 import axios from "axios";
-import ReactPlayer from "react-player";
+import React from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
 import YTSearch from "youtube-api-search";
+import { useState, useEffect } from 'react';
+import styles from '../styles/Home.module.css';
 // components
+import ReactPlayer from "react-player";
 import Rain from "../components/Rain/Rain";
 import Tabs from "../components/Tabs/Tabs";
-import Marquee from "../components/Marquee/Marquee";
 import Popup from "../components/Popup/Popup";
+import Marquee from "../components/Marquee/Marquee";
+// typing
 import {Song} from "./typing";
+// server side rendering props
 interface Props {
     songs: [Song];
 }
