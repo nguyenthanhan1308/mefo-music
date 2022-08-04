@@ -34,9 +34,20 @@ button:hover,input:focus{
   background: #f0f0f0b9;
   transition:3s;
 }
+.Home_controllers__0W4rT {
+  position: relative;
+  left: 0;
+  top: 0;
+  transform: none;
+  opacity: 1;
+  transition: 3s;
+}
+.hidden{
+  opacity: 0;
+  display: none;
+}
 .drop {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(13, 52, 58, 1)), to(rgba(255, 255, 255, 0.5)));
-  /* background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.5) 100%); */
   width: 1px;
   height: 89px;
   position: absolute;
@@ -50,6 +61,7 @@ button:hover,input:focus{
   position:absolute;
   left: 1%;
 }
+
 /* drop animation styles */
 @-webkit-keyframes fall {
   to {
@@ -68,3 +80,4 @@ button:hover,input:focus{
     margin-top: 900px;
   }
 }
+

@@ -3,7 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import YTSearch from "youtube-api-search";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Home.module.css';
 // components
 import ReactPlayer from "react-player";
@@ -32,6 +32,7 @@ export default function Home({songs}:Props) {
     // youtube search
     const [ytSearchTerm, setYTSearchTerm] = useState("");
     const [isSearching, setIsSearching] = useState(false);
+    const reactplayerRef = useRef()
     // background state
     const backgroundList = [
         {
@@ -180,6 +181,9 @@ export default function Home({songs}:Props) {
             resetSearchTerm();
         });
     };
+
+
+    // useEffect to set first loading and quote
     useEffect(()=>{
         setLoading(true);
             setTimeout(() => {
@@ -245,11 +249,12 @@ export default function Home({songs}:Props) {
                     />
                     {/* player */}
                     <ReactPlayer
+                        id={"reactplayer"}
                         className={`${currentTab === "music" ? styles.controllers : styles.tabHidden}`}
                         playing={isPlaying}
                         controls={true}
                         url={nowPlaying?.src}
-                        // stopOnUnmount={false}
+                        ref={reactplayerRef}
                         onEnded={onNowPlayingEnded}
                         onPause={() => setIsPlaying(false)}
                         onStart={() => setIsPlaying(true)}
@@ -305,10 +310,10 @@ export default function Home({songs}:Props) {
                             <div className={styles.playlistitems}>
                                 <ol>
                                     {playlist.map(song => (
-                                        <div className={styles.song} key={`container ${song.title}`}>
+                                        <div className={styles.song} key={`container ${song._id}`}>
                                             <Image
                                                 alt=""
-                                                key={song.title}
+                                                key={`image ${song._id}`}
                                                 onClick={() => playSelectedSong(song._id)}
                                                 className={`${styles.songIcon} ${
                                                     playlistLoading ? styles.loadingPlaylist : ""
