@@ -16,10 +16,10 @@ export default function Popup(props) {
             url: "/images/rain.gif"
         }
     ]
-
+    const [currentPopupUrl, setCurrentPopupUrl] = useState(popupBackgroundList[0]?.url)
     return (
         <div className={styles.modal}>
-            <div className={styles.popup} style={{ justifyContent: "space-between", backgroundImage: `url(${popupBackgroundList[2].url})` }}>
+            <div className={styles.popup} style={{ justifyContent: "space-between", backgroundImage: `url(${currentPopupUrl})` }}>
                 <div className={styles.popupBody}>
                     <span>{popup.message}</span>
                 </div>

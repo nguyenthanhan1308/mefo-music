@@ -21,7 +21,7 @@ export default function Home({songs}:Props) {
     const [timeQuotes, setTimeQuotes] = useState<String>("");
     // env
     const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [playlistLoading, setPlaylistLoading] = useState(false);
     // tab
     const [currentTab, setCurrentTab] = useState("music");
@@ -81,6 +81,7 @@ export default function Home({songs}:Props) {
         setIsPlaying(true);
         setNowPlaying(selectedSong)
     };
+
     const deleteSelectedSong = async (_id: string) => {
         setPlaylistLoading(true);
         const deleteIndex = playlist.findIndex(p => p?._id === _id);
@@ -179,10 +180,10 @@ export default function Home({songs}:Props) {
         });
     };
     useEffect(()=>{
-        // setLoading(true);
-        //     setTimeout(() => {
-        //     setLoading(false);
-        // },10000)
+        setLoading(true);
+            setTimeout(() => {
+            setLoading(false);
+        },10000)
         const time = new Date().getHours();
         switch (true) {
             case time >= 4 && time < 11:
