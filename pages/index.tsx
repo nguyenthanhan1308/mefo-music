@@ -21,7 +21,7 @@ interface Props {
 export default function Home({songs}:Props) {
     const [timeQuotes, setTimeQuotes] = useState<String>("");
     // env
-    const YOUTUBE_API_KEY = "AIzaSyCHpX3Eo4T-1Rkx3snL6ZEjEJ91-6jafTQ";
+    const YOUTUBE_API_KEY = process.env.YOUTUBE_CREDENTIAL_KEY;
     const [loading, setLoading] = useState(true);
     const [playlistLoading, setPlaylistLoading] = useState(false);
     // tab
