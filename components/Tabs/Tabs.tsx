@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from "./Tabs.module.css";
-export default function Tabs({currentTab,setCurrentTab,}) {
-    const element = document?.getElementsByClassName("Home_controllers__0W4rT")[0]
+export default function Tabs({currentTab,setCurrentTab,}) {    
     const hideReactPlayer = () =>{ 
+        const element = document?.getElementsByClassName("Home_controllers__0W4rT")[0]
         element?.classList.add("hidden")
     }
     const showReactPlayer = () => { 
+        const element = document?.getElementsByClassName("Home_controllers__0W4rT")[0]
         element?.classList.remove("hidden")
     }
     const tabTitleList = ["music", "book", "stream"];

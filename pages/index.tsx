@@ -29,7 +29,7 @@ export default function Home({songs}:Props) {
     // modal state
     const [popup, setPopup] = useState({});
     const [isShowPopup, setIsShowPopup] = useState(false);
-    // youtube search
+    // YouTube search
     const [ytSearchTerm, setYTSearchTerm] = useState("");
     const [isSearching, setIsSearching] = useState(false);
     const reactplayerRef = useRef()
@@ -172,15 +172,18 @@ export default function Home({songs}:Props) {
                     })
                     .catch(err => {
                         setPopup({
-                            message: "Failed to get playlist!",
+                            message: `Failed to get playlist! ${err.response.data}`,
                             type: "ERROR",
                         });
-                        console.log(err.response.data);
                     });
                 }
             resetSearchTerm();
         });
     };
+
+    const onReadyHandler = (element) => {
+        reactplayerRef.current = element;
+    }
 
 
     // useEffect to set first loading and quote
@@ -254,11 +257,11 @@ export default function Home({songs}:Props) {
                         playing={isPlaying}
                         controls={true}
                         url={nowPlaying?.src}
-                        ref={reactplayerRef}
                         onEnded={onNowPlayingEnded}
                         onPause={() => setIsPlaying(false)}
                         onStart={() => setIsPlaying(true)}
                         onPlay={() => setIsPlaying(true)}
+                        onReady={(element)=>onReadyHandler(element)}
                     />
                     {/* playlist */}
                     <div
