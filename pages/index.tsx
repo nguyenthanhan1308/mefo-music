@@ -386,7 +386,7 @@ export default function Home({songs}:Props) {
 export const getServerSideProps = async () => {
     const songs = await axios({
         method: 'get',
-        url: 'https://mefo-music.herokuapp.com/api/songs',
+        url: 'https://mefo-music.onrender.com/api/songs',
     }).then(response => {
         return response.data.songs;
     }).catch(err => {
