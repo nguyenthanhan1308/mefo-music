@@ -187,11 +187,11 @@ export default function Home({songs}:Props) {
 
 
     // useEffect to set first loading and quote
-    useEffect(()=>{
+    useEffect(() => {
         setLoading(true);
-            setTimeout(() => {
+        setTimeout(() => {
             setLoading(false);
-        },10000)
+        },3000)
         const time = new Date().getHours();
         switch (true) {
             case time >= 4 && time < 11:
@@ -213,21 +213,7 @@ export default function Home({songs}:Props) {
     },[]);
 
     return loading ? (
-        <div className={styles.rainWrapper}>
-            <audio autoPlay preload="auto" loop>
-                <source src="/audio/rain.mp3" type="audio/mpeg" />
-            </audio>
-            <Rain />
-            <div className={styles.loadingWrapper}>
-                <h1 className={styles.loadingText}>L</h1>
-                <h1 className={styles.loadingText}>O</h1>
-                <h1 className={styles.loadingText}>A</h1>
-                <h1 className={styles.loadingText}>D</h1>
-                <h1 className={styles.loadingText}>I</h1>
-                <h1 className={styles.loadingText}>N</h1>
-                <h1 className={styles.loadingText}>G</h1>
-            </div>
-        </div>
+        <Rain />
     ) : (
         <div className={styles.container}>
             <Head>
@@ -388,7 +374,7 @@ export const getServerSideProps = async () => {
         method: 'get',
         url: 'https://mefo-music.onrender.com/api/songs',
     }).then(response => {
-        return response.data.songs;
+        return response?.data?.songs;
     }).catch(err => {
         console.log(err);
         return [];
